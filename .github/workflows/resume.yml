@@ -125,7 +125,7 @@ jobs:
           git add .
           git commit -m "Publish resume PDFs from ${GITHUB_SHA} [skip ci]"
           git branch -M gh-pages
-          git remote add origin "https://x-access-token:${DOCX_PUSH_TOKEN}@github.com/<YOUR_USERNAME>/docx.git"
+          git remote add origin "https://x-access-token:${DOCX_PUSH_TOKEN}@github.com/divyanshrana/docx.git"
           git push --force origin gh-pages
         env:
           DOCX_PUSH_TOKEN: ${{ secrets.DOCX_PUSH_TOKEN }}
