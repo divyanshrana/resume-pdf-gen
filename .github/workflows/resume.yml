@@ -1,26 +1,33 @@
-name: Build and Deploy Resume
+name: Build & Deploy Resume
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:
+
+# Needed for Pages deploy
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
-    if: github.actor != 'github-actions[bot]'  # avoid loops
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          persist-credentials: false # we’ll inject our own token
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
+          cache: npm
 
       - name: Cache Puppeteer Chromium
         uses: actions/cache@v4
@@ -30,43 +37,34 @@ jobs:
           restore-keys: |
             puppeteer-${{ runner.os }}-
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install deps
+        run: npm ci
 
+      # Your resume-to-pdf.js should launch Puppeteer with --no-sandbox
+      # and write to public/Divyansh_Rana_Resume.pdf
       - name: Generate PDF
         run: node resume-to-pdf.js
 
-      - name: Commit PDF back to repo
+      - name: Prepare site files
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add Divyansh_Rana_Resume.pdf
-          git commit -m "chore: update generated resume PDF [skip ci]" || echo "No changes to commit"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          mkdir -p public
+          # serve the HTML and the PDF on Pages
+          cp resume.html public/index.html
+          # if your script already writes the PDF to public/, this next line is not needed.
+          if [ -f Divyansh_Rana_Resume.pdf ]; then cp Divyansh_Rana_Resume.pdf public/; fi
 
-  deploy:
-    if: github.actor != 'github-actions[bot]'  # avoid loops
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload static site
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: . # deploy everything (HTML + PDF)
+          path: public
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
