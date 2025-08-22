@@ -44,22 +44,38 @@ jobs:
         env:
           GITHUB_SHA: ${{ github.sha }}
 
-      # collect into public/ and create a cache-busted copy
-      - name: Collect PDF into public
+      # Option A: copy whatever PDF was produced into /public and add a cache-busted copy
+      - name: Collect PDF into public (robust)
         run: |
-          set -e
+          set -euo pipefail
           mkdir -p public
-          if [ -f Divyansh_Rana_Resume.pdf ]; then
-            cp Divyansh_Rana_Resume.pdf public/
+
+          echo "Looking for PDFs in repo root..."
+          ls -lah || true
+
+          PDF_SRC="Divyansh_Rana_Resume.pdf"
+          if [ ! -f "$PDF_SRC" ]; then
+            echo "Expected $PDF_SRC not found. Searching for any *.pdf..."
+            PDF_SRC=$(ls -1 *.pdf 2>/dev/null | head -n1 || true)
           fi
+
+          if [ -z "${PDF_SRC:-}" ] || [ ! -f "$PDF_SRC" ]; then
+            echo "ERROR: No PDF found in repo root after generation."
+            exit 1
+          fi
+
+          echo "Found PDF: $PDF_SRC"
+          cp "$PDF_SRC" public/Divyansh_Rana_Resume.pdf
           cp public/Divyansh_Rana_Resume.pdf "public/Divyansh_Rana_Resume_${GITHUB_SHA}.pdf"
+
+          echo "Listing public/ after copy:"
+          ls -lah public
         env:
           GITHUB_SHA: ${{ github.sha }}
 
-      - name: Verify PDF exists and changed
+      - name: Verify PDF exists and print checksums
         run: |
-          echo "Listing public/"
-          ls -lah public
+          set -euo pipefail
           test -f public/Divyansh_Rana_Resume.pdf || (echo "PDF not in public/"; exit 1)
           echo "SHA256 (stable):"
           sha256sum public/Divyansh_Rana_Resume.pdf
@@ -68,7 +84,7 @@ jobs:
         env:
           GITHUB_SHA: ${{ github.sha }}
 
-      # Optional: simple index with both links at site root
+      # Optional landing page with links to both PDFs
       - name: Generate index.html with fresh link
         run: |
           cat > public/index.html <<'HTML'
