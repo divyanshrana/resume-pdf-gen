@@ -84,30 +84,60 @@ jobs:
         env:
           GITHUB_SHA: ${{ github.sha }}
 
-      # Optional landing page with links to both PDFs
-      - name: Generate index.html with fresh link
+      # Auto-generate a tiny landing page with stable + fresh links
+      - name: Generate index.html with links
         run: |
+          COMMIT=${GITHUB_SHA}
+          DATE_ISO=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          mkdir -p public
           cat > public/index.html <<'HTML'
           <!doctype html>
           <html lang="en">
           <head>
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <title>Resume</title>
+            <title>Divyansh Rana — Resume</title>
             <style>
-              body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.5; padding: 2rem; max-width: 820px; margin: auto; }
-              a { text-decoration: none; }
+              :root { --fg:#0f172a; --muted:#475569; --bg:#f8fafc; --card:#ffffff; }
+              *{box-sizing:border-box}
+              body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--fg); background:var(--bg); }
+              .wrap { max-width: 880px; margin: 48px auto; padding: 24px; }
+              .card { background:var(--card); border-radius:16px; padding:24px; box-shadow:0 6px 24px rgba(2,6,23,.06); }
+              h1 { margin:0 0 8px; font-size:28px; }
+              .meta { color:var(--muted); margin-bottom:16px; font-size:14px; }
+              .links a { display:inline-block; margin-right:16px; padding:10px 14px; border-radius:10px; text-decoration:none; border:1px solid #e2e8f0; }
+              .links a:hover { background:#f1f5f9; }
+              code { background:#f1f5f9; padding:2px 6px; border-radius:6px; }
             </style>
           </head>
           <body>
-            <h1>Divyansh Rana — Resume</h1>
-            <p><a href="Divyansh_Rana_Resume.pdf">Stable PDF</a> (may be cached)</p>
-            <p><a id="fresh" href="#">Fresh (per-commit) PDF</a></p>
-            <script>document.getElementById('fresh').href = 'Divyansh_Rana_Resume_{{SHA}}.pdf';</script>
+            <div class="wrap">
+              <div class="card">
+                <h1>Divyansh Rana — Resume</h1>
+                <div class="meta">
+                  Built at <span id="built"></span>,
+                  commit <code id="sha-short"></code>
+                </div>
+                <div class="links">
+                  <a href="Divyansh_Rana_Resume.pdf">Stable PDF</a>
+                  <a id="fresh" href="#">Fresh (per-commit) PDF</a>
+                </div>
+              </div>
+            </div>
+            <script>
+              (function() {
+                var sha = "{{SHA}}";
+                var iso = "{{DATE_ISO}}";
+                document.getElementById('fresh').href = 'Divyansh_Rana_Resume_' + sha + '.pdf';
+                document.getElementById('sha-short').textContent = sha.slice(0,7);
+                document.getElementById('built').textContent = new Date(iso).toUTCString();
+              })();
+            </script>
           </body>
           </html>
           HTML
-          sed -i "s/{{SHA}}/${GITHUB_SHA}/g" public/index.html
+          sed -i "s/{{SHA}}/${COMMIT}/g" public/index.html
+          sed -i "s/{{DATE_ISO}}/${DATE_ISO}/g" public/index.html
         env:
           GITHUB_SHA: ${{ github.sha }}
 
