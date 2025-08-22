@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Divyansh Rana - Resume</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.5;
+      color: #222;
+    }
+    h1 {
+      font-size: 26px;
+      margin-bottom: 4px;
+      color: #003366;
+    }
+    h2 {
+      font-size: 18px;
+      margin-top: 20px;
+      border-bottom: 2px solid #003366;
+      padding-bottom: 4px;
+      color: #003366;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .contact {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .section {
+      margin-bottom: 18px;
+    }
+    .job {
+      margin-bottom: 12px;
+    }
+    .job-title {
+      font-weight: bold;
+    }
+    .job-date {
+      float: right;
+      font-size: 12px;
+      color: #555;
+    }
+    ul {
+      margin: 6px 0 6px 20px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .skills-grid div {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Divyansh Rana</h1>
+  <div class="contact">
+    <a href="mailto:divyansh.rana12@gmail.com">divyansh.rana12@gmail.com</a> |
+    <a href="https://linkedin.com">LinkedIn</a> |
+    +91 8968121890 | Bengaluru, India
+  </div>
+
+  <div class="section">
+    <h2>Experience</h2>
+    <p>Backend Engineer with 6+ years of experience in scalable distributed systems, cloud-native architectures, and high-performance microservices. Skilled in Java, Spring Boot, Quarkus, Kafka, AWS, Kubernetes, with expertise in OOP, large-scale system distribution, modernizing legacy systems, optimizing performance, and driving developer productivity. Passionate about system design, resilient APIs, and cloud infrastructure.</p>
+
+    <div class="job">
+      <div>
+        <span class="job-title">Software Engineer II</span> – Delta Airlines
+        <span class="job-date">Dec 2022 – Present | Bangalore, India</span>
+      </div>
+      <ul>
+        <li>Architected and developed a cloud-native vacation booking platform in Java, Quarkus, and Redis, reducing booking latency by 30% and supporting 10K+ concurrent users.</li>
+        <li>Implemented SAGA pattern for distributed transactions across microservices, improving consistency and fault tolerance.</li>
+        <li>Built a vacation builder with reactive programming, serving APIs to thousands of travel agents using scalable design patterns.</li>
+        <li>Automated CI/CD pipelines in GitLab with linting, test coverage, Veracode scanning, and secure deployments.</li>
+        <li>Modernized 10+ legacy monolith applications into microservices with SSO and modular UI flows (NX monorepo).</li>
+        <li>Enhanced reliability with AWS CloudWatch monitoring and automated alerts.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div>
+        <span class="job-title">Software Engineer II</span> – Scienaptic AI
+        <span class="job-date">Oct 2020 – Dec 2022 | Bangalore, India</span>
+      </div>
+      <ul>
+        <li>Developed an automated credit decisioning platform with end-to-end underwriting workflows.</li>
+        <li>Built a real-time forecasting and what-if analysis tool using Angular, Spring Boot, Kafka, and JUnit, following TDD.</li>
+        <li>Designed webhook-based (Java + NoSQL) for mobile-first apps.</li>
+        <li>Introduced PR best practices: code quality, design patterns, and documentation.</li>
+        <li>Led execution of a pricing guidance system automating sales strategy reports and documentation.</li>
+        <li>Delivered interactive dashboards (AureliaJS + Plotly) with client-side caching for real-time insights.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div>
+        <span class="job-title">Systems Engineer</span> – Infosys
+        <span class="job-date">Aug 2019 – Oct 2020 | Pune, India</span>
+      </div>
+      <ul>
+        <li>Created an internal job portal with Angular + Spring Framework.</li>
+        <li>Delivered production-ready code in Agile/XP practices.</li>
+        <li>Contributed to infrastructure compliance and platform modernization.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div><b>Backend:</b> Java, Spring Boot, Quarkus, Kafka, Hibernate/JPA</div>
+      <div><b>Cloud & Infra:</b> AWS (Lambda, S3, Route53), Docker, Kubernetes, Redis</div>
+      <div><b>Frontend:</b> Angular, React, Next.js, TypeScript</div>
+      <div><b>DevOps/Tools:</b> GitLab CI/CD, AWS CloudWatch, Veracode, MySQL, MongoDB</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Education</h2>
+    <p>B.E. in Computer Science Engineering | 2015 – 2019 | India<br>CGPA: 8.2 / 10</p>
+  </div>
+
+  <div class="section">
+    <h2>Projects</h2>
+    <ul>
+      <li><b>GenAI Reddit Uploader:</b> Automated bot using Stable Diffusion XL for image generation + dynamic text; scheduled posting via GitHub Actions.</li>
+      <li><b>Photogram (Social Media App):</b> Built & deployed Spring Boot + React app with JWT auth & profile management; deployed on Heroku.</li>
+      <li><b>GraphLink (Scalable Backend Infra):</b> Architected event-driven microservices platform with service discovery, API gateway, Neo4J, Kafka, Docker, Kubernetes; automated via GitHub Actions.</li>
+    </ul>
+  </div>
+
+</body>
+</html>
