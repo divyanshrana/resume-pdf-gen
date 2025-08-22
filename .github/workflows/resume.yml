@@ -1,4 +1,4 @@
-name: Build & Deploy Resume
+name: Build PDFs and publish to docx Pages
 
 on:
   push:
@@ -7,19 +7,13 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout source repo
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -44,48 +38,24 @@ jobs:
         env:
           GITHUB_SHA: ${{ github.sha }}
 
-      # Option A: copy whatever PDF was produced into /public and add a cache-busted copy
-      - name: Collect PDF into public (robust)
+      - name: Collect into public/ and add cache-busted copy
         run: |
           set -euo pipefail
           mkdir -p public
-
-          echo "Looking for PDFs in repo root..."
-          ls -lah || true
-
           PDF_SRC="Divyansh_Rana_Resume.pdf"
           if [ ! -f "$PDF_SRC" ]; then
-            echo "Expected $PDF_SRC not found. Searching for any *.pdf..."
+            echo "Expected $PDF_SRC not found. Searching any *.pdf..."
             PDF_SRC=$(ls -1 *.pdf 2>/dev/null | head -n1 || true)
           fi
-
           if [ -z "${PDF_SRC:-}" ] || [ ! -f "$PDF_SRC" ]; then
-            echo "ERROR: No PDF found in repo root after generation."
+            echo "ERROR: No PDF found after generation"
             exit 1
           fi
-
-          echo "Found PDF: $PDF_SRC"
           cp "$PDF_SRC" public/Divyansh_Rana_Resume.pdf
           cp public/Divyansh_Rana_Resume.pdf "public/Divyansh_Rana_Resume_${GITHUB_SHA}.pdf"
-
-          echo "Listing public/ after copy:"
           ls -lah public
-        env:
-          GITHUB_SHA: ${{ github.sha }}
 
-      - name: Verify PDF exists and print checksums
-        run: |
-          set -euo pipefail
-          test -f public/Divyansh_Rana_Resume.pdf || (echo "PDF not in public/"; exit 1)
-          echo "SHA256 (stable):"
-          sha256sum public/Divyansh_Rana_Resume.pdf
-          echo "SHA256 (versioned):"
-          sha256sum "public/Divyansh_Rana_Resume_${GITHUB_SHA}.pdf"
-        env:
-          GITHUB_SHA: ${{ github.sha }}
-
-      # Auto-generate a tiny landing page with stable + fresh links
-      - name: Generate index.html with links
+      - name: Generate index.html (stable + fresh links)
         run: |
           COMMIT=${GITHUB_SHA}
           DATE_ISO=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -99,7 +69,6 @@ jobs:
             <title>Divyansh Rana — Resume</title>
             <style>
               :root { --fg:#0f172a; --muted:#475569; --bg:#f8fafc; --card:#ffffff; }
-              *{box-sizing:border-box}
               body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--fg); background:var(--bg); }
               .wrap { max-width: 880px; margin: 48px auto; padding: 24px; }
               .card { background:var(--card); border-radius:16px; padding:24px; box-shadow:0 6px 24px rgba(2,6,23,.06); }
@@ -119,7 +88,7 @@ jobs:
                   commit <code id="sha-short"></code>
                 </div>
                 <div class="links">
-                  <a href="Divyansh_Rana_Resume.pdf">Stable PDF</a>
+                  <a id="stable" href="#">Stable PDF</a>
                   <a id="fresh" href="#">Fresh (per-commit) PDF</a>
                 </div>
               </div>
@@ -128,7 +97,8 @@ jobs:
               (function() {
                 var sha = "{{SHA}}";
                 var iso = "{{DATE_ISO}}";
-                document.getElementById('fresh').href = 'Divyansh_Rana_Resume_' + sha + '.pdf';
+                document.getElementById('stable').href = 'Divyansh_Rana_Resume.pdf?v=' + sha;
+                document.getElementById('fresh').href  = 'Divyansh_Rana_Resume_' + sha + '.pdf';
                 document.getElementById('sha-short').textContent = sha.slice(0,7);
                 document.getElementById('built').textContent = new Date(iso).toUTCString();
               })();
@@ -141,18 +111,22 @@ jobs:
         env:
           GITHUB_SHA: ${{ github.sha }}
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
+      # ---- Publish to the other repo (docx) on branch gh-pages ----
+      - name: Push to docx:gh-pages
+        run: |
+          set -euo pipefail
+          cd public
+          # Optional: add a custom domain
+          # echo 'cv.example.com' > CNAME
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          git init
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Publish resume PDFs from ${GITHUB_SHA} [skip ci]"
+          git branch -M gh-pages
+          git remote add origin "https://x-access-token:${DOCX_PUSH_TOKEN}@github.com/<YOUR_USERNAME>/docx.git"
+          git push --force origin gh-pages
+        env:
+          DOCX_PUSH_TOKEN: ${{ secrets.DOCX_PUSH_TOKEN }}
+          GITHUB_SHA: ${{ github.sha }}
