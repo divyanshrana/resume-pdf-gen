@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Divyansh Rana - Resume</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 40px 17%;
       line-height: 1.5;
       color: #222;
     }
+
     h1 {
       font-size: 26px;
       margin-bottom: 4px;
       color: #003366;
     }
+
     h2 {
       font-size: 18px;
       margin-top: 20px;
@@ -22,244 +25,543 @@
       padding-bottom: 4px;
       color: #003366;
     }
+
     a {
       color: #0366d6;
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
     }
+
     .contact {
       font-size: 14px;
       margin-bottom: 20px;
     }
+
     .section {
       margin-bottom: 18px;
     }
-    .job {
-      margin-bottom: 12px;
-    }
+
     .job-title {
-      font-weight: bold;
+      font-style: italic;
+      color: #555;
     }
+
     .job-date {
       float: right;
       font-size: 12px;
       color: #555;
     }
+
     ul {
-      margin: 6px 0 6px 20px;
+      margin: 6px 0 6px 20px !important;
     }
+
+    li {
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
     .skills-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
     }
-    .skills-grid div {
+
+    :root {
+      --fab-size: 46px;
+      --fab-radius: 12px;
+      --fab-bg: linear-gradient(135deg, #4f9efc, #6bb9ff);
+      /* light blue gradient */
+      --fab-border: #a6d3ff;
+      --fab-shadow: 0 4px 14px rgba(100, 149, 237, 0.25);
+    }
+
+    .fab-download {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 1000;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      width: var(--fab-size);
+      height: var(--fab-size);
+      padding: 0 12px;
+      overflow: hidden;
+
+      background: var(--fab-bg);
+      color: #fff;
+      border: 1px solid var(--fab-border);
+      border-radius: var(--fab-radius);
+      box-shadow: 0 2px 8px rgba(100, 149, 237, 0.15);
+
+      text-decoration: none;
+      white-space: nowrap;
       font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .3px;
+
+      transition:
+        width .2s ease,
+        box-shadow .2s ease,
+        background .2s ease,
+        transform .15s ease;
+    }
+
+    /* Expanded state */
+    .fab-download:hover,
+    .fab-download:focus-visible,
+    .fab-download:active,
+    .fab-download.is-expanded {
+      width: 160px;
+      box-shadow: var(--fab-shadow);
+      background: linear-gradient(135deg, #4590f5, #5aaeff);
+      transform: translateY(-1px);
+    }
+
+    .fab-icon {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+      flex: 0 0 auto;
+    }
+
+    .fab-icon rect {
+      fill: #fff;
+      opacity: 0.25;
+    }
+
+    .fab-label {
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity .16s ease .08s, transform .16s ease .08s;
+      user-select: none;
+    }
+
+    .fab-download:hover .fab-label,
+    .fab-download:focus-visible .fab-label,
+    .fab-download:active .fab-label,
+    .fab-download.is-expanded .fab-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        --fab-size: 42px;
+      }
+
+      .fab-download {
+        top: 16px;
+        right: 16px;
+      }
     }
   </style>
+  <script>
+    // Touch-friendly expand
+    (function () {
+      const btn = document.querySelector('.fab-download');
+      if (!btn) return;
+
+      let t;
+      const expand = (ms = 1200) => {
+        btn.classList.add('is-expanded');
+        clearTimeout(t);
+        t = setTimeout(() => btn.classList.remove('is-expanded'), ms);
+      };
+      btn.addEventListener('touchstart', () => expand(1500), { passive: true });
+    })();
+  </script>
 </head>
+
 <body>
 
-<!-- <p><a href="Divyansh_Rana_Resume.pdf" download>Download PDF</a></p> -->
-<div class="header"></div>
-  <h1 style="text-align: center;">Divyansh Rana</h1>
+  <!-- <p><a href="Divyansh_Rana_Resume.pdf" download>Download PDF</a></p> -->
+  <h1 style="text-align: center; margin-bottom: 23px;">Divyansh Rana</h1>
   <style>
-    @media print { .no-print { display: none !important; } }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+    }
   </style>
 
-  <div class="contact no-print" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px;">
+  <div class="contact" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px;">
     <a href="mailto:divyansh.rana12@gmail.com" class="contact-link" style="display: flex; align-items: center;">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Gmail" width="16" height="16" style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg" alt="Email" width="16"
+        height="16"
+        style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
       divyansh.rana12@gmail.com
     </a>
     <span class="divider">|</span>
-    <a href="https://linkedin.com" class="contact-link" target="_blank" style="display: flex; align-items: center;">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="16" height="16" style="vertical-align:middle; margin-right:4px; filter: invert(24%) sepia(94%) saturate(1877%) hue-rotate(187deg) brightness(92%) contrast(101%);">
+    <a href="https://www.linkedin.com/in/divyansh-rana-a77696142/" class="contact-link" target="_blank"
+      style="display: flex; align-items: center;">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="16"
+        height="16"
+        style="vertical-align:middle; margin-right:4px; filter: invert(24%) sepia(94%) saturate(1877%) hue-rotate(187deg) brightness(92%) contrast(101%);">
       LinkedIn
     </a>
     <span class="divider">|</span>
     <span class="contact-info" style="display: flex; align-items: center;">
-      <img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/solid/phone.svg" alt="Phone" width="16" height="16" style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
+      <img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/solid/phone.svg" alt="Phone" width="16"
+        height="16"
+        style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
       +91 8968121890
     </span>
     <span class="divider">|</span>
     <span class="contact-info" style="display: flex; align-items: center;">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlemaps.svg" alt="Location" width="16" height="16" style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlemaps.svg" alt="Location" width="16"
+        height="16"
+        style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
       Bengaluru, India
     </span>
   </div>
-
-  <p style="margin-top:12px; text-align: center;">
-    <a href="Divyansh_Rana_Resume.pdf" download class="download-btn sticky-download no-print">
-      Download PDF
-    </a>
-  </p>
+  <a href="Divyansh_Rana_Resume.pdf" download class="fab-download" aria-label="Download resume PDF">
+    <!-- flat icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"
+      class="fab-icon">
+      <path d="M12 3v10m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    </svg>
+    <span class="fab-label">Download</span>
+  </a>
   <style>
-  .sticky-download {
-    position: fixed;
-    top: 24px;
-    right: 32px;
-    z-index: 1000;
-    box-shadow: 0 4px 16px rgba(3,102,214,0.12);
-    background: linear-gradient(90deg, #003366 70%, #0366d6 100%);
-    color: #fff;
-    border: none;
-    border-radius: 24px;
-    padding: 10px 28px;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-  }
-  .sticky-download:hover {
-    background: linear-gradient(90deg, #0366d6 70%, #003366 100%);
-    box-shadow: 0 8px 24px rgba(3,102,214,0.18);
-    transform: translateY(-2px) scale(1.04);
-  }
-  @media (max-width: 600px) {
-    .sticky-download {
-      top: auto;
-      bottom: 18px;
-      right: 16px;
-      left: auto;
-      padding: 10px 18px;
+    .download-btn {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 1000;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      color: #fff;
+      padding: 10px 20px;
       font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+
+      transition: all 0.2s ease;
     }
-  }
+
+    .download-btn:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .download-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(30, 64, 175, 0.2);
+    }
+
+    .download-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: white;
+    }
+
+    @media (max-width: 600px) {
+      .download-btn {
+        top: auto;
+        bottom: 20px;
+        right: 16px;
+        font-size: 13px;
+        padding: 9px 16px;
+        border-radius: 10px;
+      }
+    }
+
+    .sticky-download {
+      position: fixed;
+      top: 24px;
+      right: 32px;
+      z-index: 1000;
+      box-shadow: 0 4px 16px rgba(3, 102, 214, 0.12);
+      background: linear-gradient(90deg, #003366 70%, #0366d6 100%);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 10px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    .sticky-download:hover {
+      background: linear-gradient(90deg, #0366d6 70%, #003366 100%);
+      box-shadow: 0 8px 24px rgba(3, 102, 214, 0.18);
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    @media (max-width: 600px) {
+      .sticky-download {
+        top: auto;
+        bottom: 18px;
+        right: 16px;
+        left: auto;
+        padding: 10px 18px;
+        font-size: 14px;
+      }
+    }
   </style>
-</div>
-<style>
-.header {
-  text-align: center;
-  margin-bottom: 28px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #e0e7ef;
-}
-.header h1 {
-  font-size: 32px;
-  color: #003366;
-  margin-bottom: 6px;
-  letter-spacing: 1px;
-}
-.contact {
-  font-size: 15px;
-  color: #444;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-  margin: 0 auto;
-}
-.contact-link {
-  color: #0366d6;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.contact-link:hover {
-  color: #003366;
-  text-decoration: underline;
-}
-.contact-info {
-  color: #444;
-  font-weight: 400;
-}
-.divider {
-  color: #b0b8c1;
-  margin: 0 6px;
-  font-size: 16px;
-}
-.download-btn {
-  display: inline-block;
-  background: #003366;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 6px 18px;
-  border-radius: 22px;
-  text-decoration: none;
-  box-shadow: 0 2px 8px rgba(0,51,102,0.07);
-  transition: background 0.2s, box-shadow 0.2s;
-}
-.download-btn:hover {
-  background: #0366d6;
-  box-shadow: 0 4px 16px rgba(3,102,214,0.12);
-}
-</style>
+  </div>
+  <style>
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e0e7ef;
+    }
 
+    .header h1 {
+      font-size: 32px;
+      color: #003366;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
 
-<div class="section">
-  <h2>Experience</h2>
-  <p>Backend Engineer with 6+ years of experience in scalable distributed systems, cloud-native architectures, and high-performance microservices. Skilled in Java, Spring Boot, Quarkus, Kafka, AWS, Kubernetes, with expertise in OOP, large-scale system distribution, modernizing legacy systems, optimizing performance, and driving developer productivity. Passionate about system design, resilient APIs, and cloud infrastructure.</p>
+    .contact {
+      font-size: 15px;
+      color: #444;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+      margin: 0 auto;
+    }
 
-  <div class="job">
-    <div>
-      <span class="job-title">Software Engineer II</span> – Delta Airlines
-      <span class="job-date">Dec 2022 – Present | Bangalore, India</span>
+    .contact-link {
+      color: #0366d6;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover {
+      color: #003366;
+      text-decoration: underline;
+    }
+
+    .contact-info {
+      color: #444;
+      font-weight: 400;
+    }
+
+    .divider {
+      color: #b0b8c1;
+      margin: 0 6px;
+      font-size: 16px;
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: #003366;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 18px;
+      border-radius: 22px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 51, 102, 0.07);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .download-btn:hover {
+      background: #0366d6;
+      box-shadow: 0 4px 16px rgba(3, 102, 214, 0.12);
+    }
+  </style>
+
+  <div class="section">
+    <h2>Experience</h2>
+    <p style="border-bottom: 1px solid #e0e7ef; padding-bottom: 10px; margin-bottom: 16px;">
+      Backend Engineer with 6+ years of experience in scalable distributed systems, cloud-native architectures, and
+      high-performance microservices. Skilled in <b>Java, Spring Boot, Quarkus, Kafka, AWS, Kubernetes</b>, with
+      expertise in
+      OOP, large-scale system distribution, modernizing legacy systems, optimizing performance, and driving developer
+      productivity. Passionate about system design, resilient APIs, and cloud infrastructure.
+    </p>
+
+    <div class="job" style="border-bottom: 1px solid #e0e7ef; padding-bottom: 10px; margin-bottom: 16px;">
+      <div>
+        <span style="font-weight: bold;">Delta Airlines</span> –
+        <span class="job-title">Software Engineer II</span>
+        <span class="job-date">Dec 2022 – Present | Bangalore, India</span>
+      </div>
+      <ul>
+        <li><b>Created and published reusable internal libraries</b> (hosted in npm Nexus repo) widely adopted across
+          the org, <b>reducing developer time</b> and <b>improving code consistency</b>.</li>
+        <li><b>Architected and developed a cloud-native vacation booking platform</b> in <b>Java, Quarkus, Redis</b>,
+          <b>reducing booking latency by 30%</b> and supporting <b>30K+ concurrent users</b>.
+        </li>
+        <li><b>Developed a real-time user activity detection service</b> from scratch, monitoring cross-tab
+          interactions, syncing session states, and triggering configurable alerts (e.g., logout warnings), <b>enhancing
+            engagement and security</b>.</li>
+        <li><b>Designed and implemented an NX framework proof-of-concept</b> for modernization initiatives, <b>reducing
+            developer overhead</b> and <b>improving team efficiency</b>.</li>
+        <li>Implemented <b>SAGA pattern</b> for distributed transactions across microservices, improving consistency and
+          fault tolerance.</li>
+        <li>Built a vacation builder with <b>reactive programming</b>, serving APIs to thousands of travel agents using
+          scalable design patterns.</li>
+        <li>Automated beta and stable release pipelines with versioning, naming conventions, and CI/CD integrations,
+          ensuring smooth adoption of shared libraries.</li>
+        <li>Automated <b>GitLab CI/CD pipelines</b> with linting, test coverage, Veracode scanning, and secure
+          deployments.</li>
+        <li>Modernized <b>10+ legacy monolith applications</b> into microservices with SSO and modular UI flows.</li>
+        <li>Enhanced reliability with <b>AWS CloudWatch monitoring</b> and automated alerts.</li>
+      </ul>
     </div>
-    <ul>
-      <li>Architected and developed a cloud-native vacation booking platform in Java, Quarkus, and Redis, reducing booking latency by 30% and supporting 10K+ concurrent users.</li>
-      <li>Implemented SAGA pattern for distributed transactions across microservices, improving consistency and fault tolerance.</li>
-      <li>Built a vacation builder with reactive programming, serving APIs to thousands of travel agents using scalable design patterns.</li>
-      <li>Automated CI/CD pipelines in GitLab with linting, test coverage, Veracode scanning, and secure deployments.</li>
-      <li>Modernized 10+ legacy monolith applications into microservices with SSO and modular UI flows (NX monorepo).</li>
-      <li>Enhanced reliability with AWS CloudWatch monitoring and automated alerts.</li>
+
+    <div class="job" style="border-bottom: 1px solid #e0e7ef; padding-bottom: 10px; margin-bottom: 16px;">
+      <div>
+        <span style="font-weight: bold;">Scienaptic AI</span> –
+        <span class="job-title">Software Engineer II</span>
+        <span class="job-date">Oct 2020 – Dec 2022 | Bangalore, India</span>
+      </div>
+      <ul>
+        <li><b>Developed an automated credit decisioning platform</b> with end-to-end underwriting workflows, enabling
+          <b>faster and more consistent loan approvals</b> for banking clients.
+        </li>
+        <li><b>Integrated 3rd-party vendor data</b> into the decision engine using webhook + cron pipelines,
+          <b>improving accuracy by 15%</b> for shared users.
+        </li>
+        <li><b>Led execution of a pricing guidance system</b> used by the marketing team to strategize product pricing.
+          Integrated external APIs and automated multi-dimensional (horizontal & vertical) calculations, <b>generating
+            actionable reports that optimized competitor benchmarking and discount strategies</b>.</li>
+        <li>Built a <b>real-time forecasting and what-if analysis tool</b> (<b>Angular, Spring Boot, Kafka, JUnit,
+            TDD</b>) for a banking client, helping simulate scenarios while ensuring data security with client-side
+          deployment.</li>
+        <li>Delivered <b>interactive dashboards</b> (AureliaJS + Plotly) with client-side caching, providing real-time
+          insights and <b>reducing latency</b> for analytics.</li>
+        <li>Designed <b>webhook-based services</b> (<b>Java + NoSQL</b>) for mobile-first apps, enabling instant user
+          notifications and smoother integration with external systems.</li>
+        <li>Introduced PR best practices (code quality, design patterns, documentation) and <b>mentored a new project
+            team</b>, improving code maintainability and collaboration.</li>
+      </ul>
+    </div>
+
+    <div class="job" style="border-bottom: 1px solid #e0e7ef; padding-bottom: 10px; margin-bottom: 16px;">
+      <div>
+        <span style="font-weight: bold;">Infosys</span> –
+        <span class="job-title">Systems Engineer</span>
+        <span class="job-date">Aug 2019 – Oct 2020 | Pune, India</span>
+      </div>
+      <ul>
+        <li><b>Developed an internal job portal</b> (<b>Angular + Spring Framework</b>) enabling direct applications and
+          interview scheduling, <b>streamlining hiring workflows</b> and reducing HR coordination time.</li>
+        <li><b>Modernized the company’s internal homepage</b> (used daily by employees) by gathering requirements,
+          suggesting enhancements, and <b>successfully launching</b> the product in an agile model.</li>
+        <li>Delivered production-ready, high-quality code by following <b>Agile and XP practices</b>, ensuring faster
+          iterations and reliable deployments.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <h2>Key Achievements</h2>
+      <ul>
+        <li><b>Reduced booking latency by 30%</b> for a high-traffic airline platform supporting <b>30K+ concurrent
+            users</b>.</li>
+        <li><b>Improved credit decision accuracy by 15%</b> through external vendor data integration.</li>
+        <li><b>Accelerated hiring workflows</b> by launching an internal job portal used across HR teams.</li>
+        <li><b>Boosted developer productivity</b> by publishing reusable libraries and automating beta/stable release
+          pipelines.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="section" style="text-align: left;">
+    <h2>Skills</h2>
+    <div class="skills-grid" style="margin-left: 3.8rem;">
+      <div><b>Backend:</b> Java, Spring Boot, Quarkus, Kafka, Hibernate/JPA</div>
+      <div><b>Cloud & Infra:</b> AWS (Lambda, S3, Route53, SQS, SNS, EventBridge), Docker, Kubernetes, Redis</div>
+      <div style="margin-top: 10px;"><b>Frontend:</b> Angular, React, Next.js, TypeScript</div>
+      <div style="margin-top: 10px;"><b>DevOps/Tools:</b> GitLab CI/CD, AWS CloudWatch, Veracode, MySQL, MongoDB</div>
+    </div>
+  </div>
+
+  <div class=" section">
+    <h2>Education</h2>
+    <p style="margin-left: 3.8rem;">B.E. in Computer Science Engineering | 2015 – 2019 | India<br>CGPA: 8.2 / 10</p>
+  </div>
+
+  <div class="section">
+    <h2>Projects</h2>
+    <ul style="margin-left: 2.5rem;">
+      <li style="margin-bottom: 18px;">
+        <div>
+          <b>
+            <a href="https://github.com/divyanshrana/reddit-image-bot" target="_blank" rel="noopener noreferrer">
+              GenAI Reddit Uploader
+            </a>
+          </b>
+        </div>
+        <div>
+          Automated bot using <b>Stable Diffusion XL</b> for image generation with <b>dynamic text</b>, filters, and
+          anti-patterns.<br>
+          Integrated <b>GitHub Actions</b> worker pipelines to schedule daily posts on a subreddit.<br>
+          Enables end-to-end <b>automated content generation and publishing</b>.
+        </div>
+      </li>
+      <li style="margin-bottom: 18px;">
+        <div>
+          <b>
+            <a href="https://github.com/divyanshrana/photogram" target="_blank" rel="noopener noreferrer">
+              Photogram (Social Media App)
+            </a>
+          </b>
+        </div>
+        <div>
+          Full-stack app with <b>Spring Boot</b> backend and <b>React</b> frontend.<br>
+          <b>JWT authentication</b> (sign-up, login, forgot-password).<br>
+          Core social features: <b>posting images/text</b>, <b>comments</b>, <b>likes</b>, <b>follow system</b>.<br>
+          Deployed on <b>Heroku</b> with complete database-backed architecture.
+        </div>
+      </li>
+      <li style="margin-bottom: 18px;">
+        <div>
+          <b>
+            <a href="https://github.com/divyanshrana/graphlink" target="_blank" rel="noopener noreferrer">
+              GraphLink (Scalable Backend Infra)
+            </a>
+          </b>
+        </div>
+        <div>
+          Event-driven microservices platform hosted on <b>Kubernetes</b>.<br>
+          Implemented <b>service discovery</b>, <b>API gateways</b>, <b>authentication</b>.<br>
+          Used <b>Neo4J</b> for user connections, <b>PostgreSQL</b> for relational data, <b>Kafka</b> for event
+          streaming.<br>
+          Microservices in <b>Spring Boot</b>, each with its own database for <b>scalability</b> and <b>fault
+            isolation</b>.
+        </div>
+      </li>
+      <li style="margin-bottom: 18px;">
+        <div>
+          <b>
+            <a href="https://github.com/divyanshrana/resume-pdf-gen" target="_blank" rel="noopener noreferrer">
+              HTML-PDF Automation Pipeline
+            </a>
+          </b>
+        </div>
+        <div>
+          Automated pipeline using <b>GitHub Actions</b> to convert <b>HTML</b> into <b>PDFs</b> on every commit.<br>
+          Published updated versions to <b>GitHub Pages</b> for browser viewing and downloads.<br>
+          Ensures a <b>continuously up-to-date resume</b> with both HTML visualization and downloadable PDF in a public
+          repo.
+        </div>
+      </li>
     </ul>
   </div>
 
-  <div class="job">
-    <div>
-      <span class="job-title">Software Engineer II</span> – Scienaptic AI
-      <span class="job-date">Oct 2020 – Dec 2022 | Bangalore, India</span>
-    </div>
-    <ul>
-      <li>Developed an automated credit decisioning platform with end-to-end underwriting workflows.</li>
-      <li>Built a real-time forecasting and what-if analysis tool using Angular, Spring Boot, Kafka, and JUnit, following TDD.</li>
-      <li>Designed webhook-based (Java + NoSQL) for mobile-first apps.</li>
-      <li>Introduced PR best practices: code quality, design patterns, and documentation.</li>
-      <li>Led execution of a pricing guidance system automating sales strategy reports and documentation.</li>
-      <li>Delivered interactive dashboards (AureliaJS + Plotly) with client-side caching for real-time insights.</li>
-    </ul>
-  </div>
-
-  <div class="job">
-    <div>
-      <span class="job-title">Systems Engineer</span> – Infosys
-      <span class="job-date">Aug 2019 – Oct 2020 | Pune, India</span>
-    </div>
-    <ul>
-      <li>Created an internal job portal with Angular + Spring Framework.</li>
-      <li>Delivered production-ready code in Agile/XP practices.</li>
-      <li>Contributed to infrastructure compliance and platform modernization.</li>
-    </ul>
-  </div>
-</div>
-
-<div class="section">
-  <h2>Skills</h2>
-  <div class="skills-grid">
-    <div><b>Backend:</b> Java, Spring Boot, Quarkus, Kafka, Hibernate/JPA</div>
-    <div><b>Cloud & Infra:</b> AWS (Lambda, S3, Route53), Docker, Kubernetes, Redis</div>
-    <div><b>Frontend:</b> Angular, React, Next.js, TypeScript</div>
-    <div><b>DevOps/Tools:</b> GitLab CI/CD, AWS CloudWatch, Veracode, MySQL, MongoDB</div>
-  </div>
-</div>
-
-<div class="section">
-  <h2>Education</h2>
-  <p>B.E. in Computer Science Engineering | 2015 – 2019 | India<br>CGPA: 9 / 10</p>
-</div>
-
-<div class="section">
-  <h2>Projects</h2>
-  <ul>
-    <li><b>GenAI Reddit Uploader:</b> Automated bot using Stable Diffusion XL for image generation + dynamic text; scheduled posting via GitHub Actions.</li>
-    <li><b>Photogram (Social Media App):</b> Built & deployed Spring Boot + React app with JWT auth & profile management; deployed on Heroku.</li>
-    <li><b>GraphLink (Scalable Backend Infra):</b> Architected event-driven microservices platform with service discovery, API gateway, Neo4J, Kafka, Docker, Kubernetes; automated via GitHub Actions.</li>
-  </ul>
-</div>
 </html>
