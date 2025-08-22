@@ -5,7 +5,6 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# Needed for Pages deploy
 permissions:
   contents: read
   pages: write
@@ -18,7 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,18 +38,56 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      # Your resume-to-pdf.js should launch Puppeteer with --no-sandbox
-      # and write to public/Divyansh_Rana_Resume.pdf
       - name: Generate PDF
         run: node resume-to-pdf.js
+        env:
+          GITHUB_SHA: ${{ github.sha }}
 
-      - name: Prepare site files
+      - name: Verify PDF exists and changed
+        run: |
+          echo "Listing public/"
+          ls -lah public || true
+          test -f public/Divyansh_Rana_Resume.pdf || (echo "PDF not in public/"; exit 1)
+          echo "SHA256 (stable):"
+          sha256sum public/Divyansh_Rana_Resume.pdf
+          echo "SHA256 (versioned):"
+          sha256sum public/Divyansh_Rana_Resume_${GITHUB_SHA}.pdf
+
+      - name: Generate index.html with fresh links
         run: |
           mkdir -p public
-          # serve the HTML and the PDF on Pages
-          cp resume.html public/index.html
-          # if your script already writes the PDF to public/, this next line is not needed.
-          if [ -f Divyansh_Rana_Resume.pdf ]; then cp Divyansh_Rana_Resume.pdf public/; fi
+          cat > public/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>Resume</title>
+            <style>
+              body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.4; padding: 2rem; max-width: 800px; margin: auto; }
+              a { text-decoration: none; }
+            </style>
+          </head>
+          <body>
+            <h1>Divyansh Rana — Resume</h1>
+            <p>
+              <a id="stable" href="Divyansh_Rana_Resume.pdf">Stable PDF</a>
+              (may be cached)
+            </p>
+            <p>
+              <a id="fresh" href="#">Fresh (per-commit) PDF</a>
+            </p>
+            <script>
+              // Insert the commit SHA at build time via placeholder substitution in the next step
+              document.getElementById('fresh').href = 'Divyansh_Rana_Resume_{{SHA}}.pdf';
+            </script>
+          </body>
+          </html>
+          HTML
+          # Inject the real SHA into index.html
+          sed -i "s/{{SHA}}/${GITHUB_SHA}/g" public/index.html
+        env:
+          GITHUB_SHA: ${{ github.sha }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
