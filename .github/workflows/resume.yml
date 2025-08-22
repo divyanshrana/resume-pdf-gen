@@ -1,4 +1,4 @@
-name: Build PDFs and publish to docx Pages
+name: Build PDF and publish to docx (stable only)
 
 on:
   push:
@@ -11,7 +11,6 @@ permissions:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout source repo
         uses: actions/checkout@v4
@@ -33,106 +32,36 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Generate PDF
+      - name: Generate PDF (stable filename)
         run: node resume-to-pdf.js
-        env:
-          GITHUB_SHA: ${{ github.sha }}
 
-      - name: Collect into public/ and add cache-busted copy
+      - name: Verify PDF exists
         run: |
-          set -euo pipefail
-          mkdir -p public
-          PDF_SRC="Divyansh_Rana_Resume.pdf"
-          if [ ! -f "$PDF_SRC" ]; then
-            echo "Expected $PDF_SRC not found. Searching any *.pdf..."
-            PDF_SRC=$(ls -1 *.pdf 2>/dev/null | head -n1 || true)
-          fi
-          if [ -z "${PDF_SRC:-}" ] || [ ! -f "$PDF_SRC" ]; then
-            echo "ERROR: No PDF found after generation"
-            exit 1
-          fi
-          cp "$PDF_SRC" public/Divyansh_Rana_Resume.pdf
-          cp public/Divyansh_Rana_Resume.pdf "public/Divyansh_Rana_Resume_${GITHUB_SHA}.pdf"
-          ls -lah public
+          test -f Divyansh_Rana_Resume.pdf || (echo "PDF not generated" && exit 1)
+          ls -lah Divyansh_Rana_Resume.pdf
 
-      - name: Generate index.html (stable + fresh links)
-        run: |
-          COMMIT=${GITHUB_SHA}
-          DATE_ISO=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          mkdir -p public
-          cat > public/index.html <<'HTML'
-          <!doctype html>
-          <html lang="en">
-          <head>
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <title>Divyansh Rana — Resume</title>
-            <style>
-              :root { --fg:#0f172a; --muted:#475569; --bg:#f8fafc; --card:#ffffff; }
-              body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--fg); background:var(--bg); }
-              .wrap { max-width: 880px; margin: 48px auto; padding: 24px; }
-              .card { background:var(--card); border-radius:16px; padding:24px; box-shadow:0 6px 24px rgba(2,6,23,.06); }
-              h1 { margin:0 0 8px; font-size:28px; }
-              .meta { color:var(--muted); margin-bottom:16px; font-size:14px; }
-              .links a { display:inline-block; margin-right:16px; padding:10px 14px; border-radius:10px; text-decoration:none; border:1px solid #e2e8f0; }
-              .links a:hover { background:#f1f5f9; }
-              code { background:#f1f5f9; padding:2px 6px; border-radius:6px; }
-            </style>
-          </head>
-          <body>
-            <div class="wrap">
-              <div class="card">
-                <h1>Divyansh Rana — Resume</h1>
-                <div class="meta">
-                  Built at <span id="built"></span>,
-                  commit <code id="sha-short"></code>
-                </div>
-                <div class="links">
-                  <a id="stable" href="#">Stable PDF</a>
-                  <a id="fresh" href="#">Fresh (per-commit) PDF</a>
-                </div>
-              </div>
-            </div>
-            <script>
-              (function() {
-                var sha = "{{SHA}}";
-                var iso = "{{DATE_ISO}}";
-                document.getElementById('stable').href = 'Divyansh_Rana_Resume.pdf?v=' + sha;
-                document.getElementById('fresh').href  = 'Divyansh_Rana_Resume_' + sha + '.pdf';
-                document.getElementById('sha-short').textContent = sha.slice(0,7);
-                document.getElementById('built').textContent = new Date(iso).toUTCString();
-              })();
-            </script>
-          </body>
-          </html>
-          HTML
-          sed -i "s/{{SHA}}/${COMMIT}/g" public/index.html
-          sed -i "s/{{DATE_ISO}}/${DATE_ISO}/g" public/index.html
-        env:
-          GITHUB_SHA: ${{ github.sha }}
-
-      # ---- Publish to the other repo (docx) on branch gh-pages ----
-      - name: Push to docx:main
-        run: |
-          set -euo pipefail
-          cd public
-
-          git init
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          git add .
-          git commit -m "Publish resume PDFs from ${GITHUB_SHA} [skip ci]"
-          git branch -M main
-
-          # IMPORTANT: token in URL for write access
-          git remote add origin "https://x-access-token:${DOCX_PUSH_TOKEN}@github.com/divyanshrana/docx.git"
-
-          # (Optional) Show remote without leaking token
-          git remote -v | sed -E 's/x-access-token:[^@]+/x-access-token:***HIDDEN***/'
-
-          # If main exists and you want to overwrite site contents each deploy:
-          git push --force origin main
+      # Publish ONLY the PDF to docx:main
+      - name: Push to docx:main (stable only)
         env:
           DOCX_PUSH_TOKEN: ${{ secrets.DOCX_PUSH_TOKEN }}
           GITHUB_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git config --global init.defaultBranch main
+
+          # Make a clean temp repo containing ONLY the PDF
+          mkdir -p publish && cp Divyansh_Rana_Resume.pdf publish/
+          cd publish
+          git init
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Divyansh_Rana_Resume.pdf
+          git commit -m "Publish stable resume PDF from ${GITHUB_SHA} [skip ci]"
+          git branch -M main
+
+          # Use username:TOKEN format for reliability
+          git remote add origin "https://divyanshrana:${DOCX_PUSH_TOKEN}@github.com/divyanshrana/docx.git"
+          git remote -v | sed -E 's/:([^@]+)@/:***HIDDEN***@/'
+
+          # Overwrite docx:main with ONLY this file
+          git push --force origin main
