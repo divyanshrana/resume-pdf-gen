@@ -1,4 +1,4 @@
-name: Build PDF and publish to docx (stable only)
+name: Build resume PDF and publish HTML+PDF to docx
 
 on:
   push:
@@ -11,6 +11,7 @@ permissions:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source repo
         uses: actions/checkout@v4
@@ -32,7 +33,7 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Generate PDF (stable filename)
+      - name: Generate PDF
         run: node resume-to-pdf.js
 
       - name: Verify PDF exists
@@ -40,8 +41,19 @@ jobs:
           test -f Divyansh_Rana_Resume.pdf || (echo "PDF not generated" && exit 1)
           ls -lah Divyansh_Rana_Resume.pdf
 
-      # Publish ONLY the PDF to docx:main
-      - name: Push to docx:main (stable only)
+      - name: Prepare publish folder
+        run: |
+          mkdir -p publish
+          # Copy your existing resume.html and rename it to index.html
+          cp resume.html publish/index.html
+          # Inject a "Download PDF" link right before </body>
+          sed -i '/<\/body>/i <p><a href="Divyansh_Rana_Resume.pdf" download>Download PDF</a></p>' publish/index.html
+          # Copy the generated PDF
+          cp Divyansh_Rana_Resume.pdf publish/
+          echo "Publish folder contents:"
+          ls -lah publish
+
+      - name: Push to docx:main
         env:
           DOCX_PUSH_TOKEN: ${{ secrets.DOCX_PUSH_TOKEN }}
           GITHUB_SHA: ${{ github.sha }}
@@ -49,19 +61,16 @@ jobs:
           set -euo pipefail
           git config --global init.defaultBranch main
 
-          # Make a clean temp repo containing ONLY the PDF
-          mkdir -p publish && cp Divyansh_Rana_Resume.pdf publish/
           cd publish
           git init
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Divyansh_Rana_Resume.pdf
-          git commit -m "Publish stable resume PDF from ${GITHUB_SHA} [skip ci]"
+
+          git add .
+          git commit -m "Publish resume HTML+PDF from ${GITHUB_SHA} [skip ci]"
           git branch -M main
 
-          # Use username:TOKEN format for reliability
           git remote add origin "https://divyanshrana:${DOCX_PUSH_TOKEN}@github.com/divyanshrana/docx.git"
           git remote -v | sed -E 's/:([^@]+)@/:***HIDDEN***@/'
 
-          # Overwrite docx:main with ONLY this file
           git push --force origin main
