@@ -18,7 +18,7 @@ const path = require('path');
   await bodyHandle.dispose();
 
   // Convert px → mm (96px ≈ 25.4mm)
-  const heightMm = (heightPx * 30.4 / 96).toFixed(2);
+  const heightMm = (heightPx * 27 / 96).toFixed(2);
 
   await page.pdf({
     path: 'Divyansh_Rana_Resume.pdf',
