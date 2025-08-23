@@ -51,7 +51,7 @@
 
     .job-date {
       float: right;
-      font-size: 12px;
+      font-size: 14px;
       color: #555;
     }
 
@@ -160,6 +160,52 @@
         right: 16px;
       }
     }
+
+    .resume-title {
+      text-align: center;
+      font-size: 41px;
+      font-weight: 300;
+      /* lighter for first name */
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      color: #222;
+      letter-spacing: 1.5px;
+      /* increased spacing */
+    }
+
+    .resume-title span {
+      font-weight: 480;
+      /* bold for last name */
+      color: #111;
+      letter-spacing: 2px;
+      /* slightly more spacing on surname */
+    }
+
+    /* 
+    body {
+      font-family: "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Optional: headings slightly stronger */
+    h1,
+    h2,
+    h3 {
+      font-family: "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 600;
+      color: #111;
+      letter-spacing: 1px;
+    }
+
+    p,
+    li,
+    span {
+      font-weight: 400;
+    }
+
+    */
   </style>
   <script>
     // Touch-friendly expand
@@ -180,45 +226,198 @@
 
 <body>
 
-  <!-- <p><a href="Divyansh_Rana_Resume.pdf" download>Download PDF</a></p> -->
-  <h1 style="text-align: center; margin-bottom: 23px;">Divyansh Rana</h1>
+  <h1 class="resume-title">
+    Divyansh <span>Rana</span>
+  </h1>
   <style>
     @media print {
       .no-print {
         display: none !important;
       }
     }
+
+    /* ---- Contact bar theme ---- */
+    :root {
+      --fg: #0f172a;
+      /* text */
+      --muted: #475569;
+      /* subtle */
+      --accent: #0ea5e9;
+      /* hover/focus tint */
+      --sep: rgba(15, 23, 42, 0.18);
+      --ring: rgba(14, 165, 233, .35);
+      --bg: #ffffff;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg: #e5e7eb;
+        --muted: #94a3b8;
+        --accent: #38bdf8;
+        --sep: rgba(226, 232, 240, 0.22);
+        --bg: #0b1220;
+      }
+    }
+
+    /* ---- Container ---- */
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+
+      gap: 12px;
+      padding: 10px 14px;
+
+      color: var(--fg);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .75), rgba(255, 255, 255, .55));
+      /* border: 1px solid var(--sep);
+      border-radius: 14px; */
+      /* box-shadow: 0 1px 2px rgba(0, 0, 0, .06); */
+      backdrop-filter: blur(6px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .contact {
+        background: linear-gradient(180deg, rgba(2, 6, 23, .35), rgba(2, 6, 23, .2));
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+      }
+    }
+
+    /* ---- Links + text items ---- */
+    .contact-link,
+    .contact-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      text-decoration: none;
+      color: inherit;
+
+      padding: 6px 8px;
+      border-radius: 10px;
+      transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .contact-link:hover {
+      background: rgba(14, 165, 233, .10);
+    }
+
+    .contact-link:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+
+    /* ---- Divider ---- */
+    .divider {
+      color: var(--muted);
+      opacity: .7;
+      user-select: none;
+    }
+
+    /* ---- SVG icons: make them crisp, follow text color ---- */
+    .contact svg {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+
+      /* Make these stroke-icons and let them inherit color */
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    /* If you keep the inline filter styles on SVGs, they'll tint the icon.
+   If you remove those inline filters, icons will automatically match text color. */
+
+    /* ---- Responsive: stack gracefully on small screens ---- */
+    @media (max-width: 480px) {
+      .contact {
+        gap: 8px 10px;
+        padding: 12px;
+        justify-content: flex-start;
+      }
+
+      .contact-link,
+      .contact-info {
+        padding: 8px 10px;
+      }
+
+      .divider {
+        display: none;
+        /* hide pipes when wrapping */
+      }
+    }
   </style>
 
   <div class="contact" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px;">
+
+    <!-- Email -->
     <a href="mailto:divyansh.rana12@gmail.com" class="contact-link" style="display: flex; align-items: center;">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg" alt="Email" width="16"
-        height="16"
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
         style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
+        <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+        <path d="m22 8-10 6L2 8" />
+      </svg>
       divyansh.rana12@gmail.com
     </a>
+
     <span class="divider">|</span>
+
+    <!-- LinkedIn -->
     <a href="https://www.linkedin.com/in/divyansh-rana-a77696142/" class="contact-link" target="_blank"
       style="display: flex; align-items: center;">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="16"
-        height="16"
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
         style="vertical-align:middle; margin-right:4px; filter: invert(24%) sepia(94%) saturate(1877%) hue-rotate(187deg) brightness(92%) contrast(101%);">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M7 8v8" />
+        <circle cx="7" cy="6" r="1" />
+        <path d="M11 16v-4a3 3 0 0 1 6 0v4" />
+      </svg>
       LinkedIn
     </a>
+
     <span class="divider">|</span>
+
+    <!-- Phone -->
     <span class="contact-info" style="display: flex; align-items: center;">
-      <img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/solid/phone.svg" alt="Phone" width="16"
-        height="16"
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
         style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
+        <path
+          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.2 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.86.33 1.7.63 2.5a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.8.3 1.64.51 2.5.63A2 2 0 0 1 22 16.92z" />
+      </svg>
       +91 8968121890
     </span>
+
     <span class="divider">|</span>
+
+    <!-- Location -->
     <span class="contact-info" style="display: flex; align-items: center;">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlemaps.svg" alt="Location" width="16"
-        height="16"
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
         style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
+        <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
       Bengaluru, India
     </span>
+
+    <span class="divider">|</span>
+
+    <!-- Portfolio -->
+    <a href="https://divyanshrana.github.io/docs/portfolio" class="contact-link" target="_blank"
+      style="display: flex; align-items: center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+        style="vertical-align:middle; margin-right:4px; filter: invert(17%) sepia(97%) saturate(748%) hue-rotate(184deg) brightness(97%) contrast(92%);">
+        <path d="M15 3h6v6" />
+        <path d="M10 14 21 3" />
+        <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      </svg>
+      Portfolio
+    </a>
+
   </div>
   <a href="Divyansh_Rana_Resume.pdf" download class="fab-download no-print" aria-label="Download resume PDF">
     <!-- flat icon -->
@@ -230,6 +429,17 @@
     <span class="fab-label">Download</span>
   </a>
   <style>
+    .job+.job {
+      border-top: 1px solid #e0e7ef;
+      padding-top: 10px;
+      margin-top: 16px;
+    }
+
+    .achievements {
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+
     .download-btn {
       position: fixed;
       top: 20px;
@@ -383,77 +593,124 @@
       background: #0366d6;
       box-shadow: 0 4px 16px rgba(3, 102, 214, 0.12);
     }
+
+    .job-skill {
+      font-size: 18px;
+    }
   </style>
 
+  <div class="section" style="text-align: left;">
+    <h2 style=" margin-top: 0;">Skills</h2>
+    <div class="skills-grid" style="margin-left: 3.8rem;">
+      <div><b>Languages:</b> Java, Javascript, Typescript, Python</div>
+      <div><b>Frameworks:</b> Spring Boot, Quarkus, Angular, React, NX, Hibernate/JPA</div>
+      <div><b>DevOps/Tools:</b> GitLab CI/CD, Veracode, MySQL, MongoDB, Kafka, Redis</div>
+      <div><b>Cloud & Infra:</b> AWS (EC2, Lambda, S3, Route53, SQS, SNS, EventBridge, Cloudwatch), Docker, Kubernetes
+      </div>
+
+    </div>
+  </div>
+
   <div class="section">
-    <h2>Experience</h2>
-    <p>
+    <h2>Experience | 6+ years </h2>
+    <!-- <p>
       Backend Engineer with 6+ years of experience in scalable distributed systems, cloud-native architectures, and
       high-performance microservices. Skilled in <b>Java, Spring Boot, Quarkus, Kafka, AWS, Kubernetes</b>, with
       expertise in
       OOP, large-scale system distribution, modernizing legacy systems, optimizing performance, and driving developer
       productivity. Passionate about system design, resilient APIs, and cloud infrastructure.
-    </p>
+    </p> -->
 
-    <div class="job" style="border-top: 1px solid #e0e7ef; padding-top: 10px; margin-top: 16px;">
+    <div class="job">
       <div>
         <span style="font-weight: bold;">Delta Airlines</span> –
         <span class="job-title">Software Engineer II</span>
         <span class="job-date">Dec 2022 – Present | Bangalore, India</span>
       </div>
       <ul>
-        <li><b>Created and published reusable internal libraries</b> (hosted in npm Nexus repo) widely adopted across
-          the org, <b>reducing developer time</b> and <b>improving code consistency</b>.</li>
         <li><b>Architected and developed a cloud-native vacation booking platform</b> in <b>Java, Quarkus, Redis</b>,
           <b>reducing booking latency by 30%</b> and supporting <b>30K+ concurrent users</b>.
         </li>
+        <li><b>Led a cost-optimization initiative</b> in the <b>ROSA (Red Hat OpenShift Service on AWS)</b> environment
+          by identifying
+          static pod deployments and enabling <b>autoscaling</b>, improving resource utilization for 20K–30K users and
+          achieving an estimated annual cost saving of <b>$30,000–$40,000</b>.</li>
+        <li>Implemented <b>SAGA pattern</b> for distributed transactions across microservices, improving consistency and
+          fault tolerance.</li>
         <li><b>Developed a real-time user activity detection service</b> from scratch, monitoring cross-tab
           interactions, syncing session states, and triggering configurable alerts (e.g., logout warnings), <b>enhancing
             engagement and security</b>.</li>
-        <li><b>Designed and implemented an NX framework proof-of-concept</b> for modernization initiatives, <b>reducing
-            developer overhead</b> and <b>improving team efficiency</b>.</li>
-        <li>Implemented <b>SAGA pattern</b> for distributed transactions across microservices, improving consistency and
-          fault tolerance.</li>
-        <li>Built a vacation builder with <b>reactive programming</b>, serving APIs to thousands of travel agents using
-          scalable design patterns.</li>
-        <li>Automated beta and stable release pipelines with versioning, naming conventions, and CI/CD integrations,
-          ensuring smooth adoption of shared libraries.</li>
-        <li>Automated <b>GitLab CI/CD pipelines</b> with linting, test coverage, Veracode scanning, and secure
-          deployments.</li>
-        <li>Modernized <b>10+ legacy monolith applications</b> into microservices with SSO and modular UI flows.</li>
-        <li>Enhanced reliability with <b>AWS CloudWatch monitoring</b> and automated alerts.</li>
+        <li><b>Orchestrated a vacation builder using Java Quarkus with reactive programming</b>, enabling non-blocking,
+          high-throughput APIs that efficiently served thousands of travel agents with improved performance and
+          scalability.</li>
+        <li><b>Designed and spearheaded an NX framework proof-of-concept</b> that was leveraged to modernize
+          <b>10+ legacy monolith applications</b> into microservices with SSO and modular UI flows,
+          <b>reducing developer overhead</b> and <b>improving team efficiency</b>.
+        </li>
+        <!-- <li><b>Created and published reusable internal libraries</b> (hosted in npm Nexus repo) widely adopted across
+          the org, <b>reducing developer time</b> and <b>improving code consistency</b>.</li> -->
+        <li><b>Devised beta and stable release pipelines</b> with versioning, naming conventions, and CI/CD
+          integrations, enabling seamless reuse of internal libraries (authentication, logging) across teams.</li>
+        <li><b>Automated and maintained GitLab CI/CD pipelines</b> with linting, test coverage, Veracode scanning, and
+          secure deployments,
+          accelerating application delivery while improving code quality and security.</li>
+        <li><b>Fortified system reliability</b> with AWS CloudWatch monitoring by tracking service availability,
+          configuring automated alerts,
+          and building an aggregated dashboard for all microservices to enable proactive issue detection and faster
+          incident response.</li>
+        <li class="job-skill">JAVA, AWS, EC2, S3, Route53, EventBridge, Cloudwatch, DynamoDB, IAMs, Redis,
+          Quarkus, Springboot, Angular,
+          NX, MongoDB, PostgreSQL, Docker</li>
       </ul>
     </div>
 
-    <div class="job" style="border-top: 1px solid #e0e7ef; padding-top: 10px; margin-top: 16px;">
+    <div class="job">
       <div>
         <span style="font-weight: bold;">Scienaptic AI</span> –
         <span class="job-title">Software Engineer II</span>
         <span class="job-date">Oct 2020 – Dec 2022 | Bangalore, India</span>
       </div>
       <ul>
-        <li><b>Developed an automated credit decisioning platform</b> with end-to-end underwriting workflows, enabling
+        <li><b>Engineered an automated credit decisioning platform</b> with end-to-end underwriting workflows, enabling
           <b>faster and more consistent loan approvals</b> for banking clients.
         </li>
-        <li><b>Integrated 3rd-party vendor data</b> into the decision engine using webhook + cron pipelines,
-          <b>improving accuracy by 15%</b> for shared users.
+
+        <li><b>Streamlined integration of 3rd-party vendor data</b> into the decision engine using webhook + cron
+          pipelines,
+          <b>boosting accuracy by 15%</b> for shared users.
         </li>
-        <li><b>Led execution of a pricing guidance system</b> used by the marketing team to strategize product pricing.
-          Integrated external APIs and automated multi-dimensional (horizontal & vertical) calculations, <b>generating
-            actionable reports that optimized competitor benchmarking and discount strategies</b>.</li>
-        <li>Built a <b>real-time forecasting and what-if analysis tool</b> (<b>Angular, Spring Boot, Kafka, JUnit,
-            TDD</b>) for a banking client, helping simulate scenarios while ensuring data security with client-side
-          deployment.</li>
-        <li>Delivered <b>interactive dashboards</b> (AureliaJS + Plotly) with client-side caching, providing real-time
-          insights and <b>reducing latency</b> for analytics.</li>
-        <li>Designed <b>webhook-based services</b> (<b>Java + NoSQL</b>) for mobile-first apps, enabling instant user
+
+        <li><b>Led execution of a pricing guidance system</b> leveraged by the marketing team to strategize
+          product pricing. Integrated external APIs and automated multi-dimensional (horizontal & vertical)
+          calculations,
+          <b>producing actionable reports that optimized competitor benchmarking and discount strategies</b>.
+        </li>
+        <li>
+          <b>Gained end-to-end understanding of the product</b> and <b>undertook the initiative to create
+            and maintain comprehensive technical documentation</b> for long-term scalability and knowledge sharing.
+        </li>
+        <li><b>Devised a real-time forecasting and what-if analysis tool</b> with <b>Test-Driven Development (TDD)</b>
+          for a banking client, empowering scenario simulations while safeguarding data through client-side deployment.
+        </li>
+
+        <li><b>Crafted interactive dashboards</b> (AureliaJS + Plotly) with client-side caching, delivering real-time
+          insights and
+          <b>reducing latency</b> for analytics.
+        </li>
+
+        <li><b>Architected webhook-based services</b> (<b>Java + NoSQL</b>) for mobile-first apps, enabling instant user
           notifications and smoother integration with external systems.</li>
-        <li>Introduced PR best practices (code quality, design patterns, documentation) and <b>mentored a new project
-            team</b>, improving code maintainability and collaboration.</li>
+
+        <li><b>Championed PR best practices</b> (coding standards, design patterns, documentation) and <b>mentored a new
+            project
+            team</b>, strengthening code maintainability and cross-team collaboration.</li>
+        <!-- <li>Created a pausable down service</li> -->
+        <li class="job-skill">JAVA, Springboot, Kafka, Junit, AWS Lamda, AWS pipeline, NodeJS, PySpark, MongoDB,
+          Javascript, AngularJS, AurliaJS </li>
       </ul>
     </div>
 
-    <div class="job" style="border-top: 1px solid #e0e7ef; padding-top: 10px; margin-top: 16px;">
+    <div class="job">
       <div>
         <span style="font-weight: bold;">Infosys</span> –
         <span class="job-title">Systems Engineer</span>
@@ -466,10 +723,11 @@
           suggesting enhancements, and <b>successfully launching</b> the product in an agile model.</li>
         <li>Delivered production-ready, high-quality code by following <b>Agile and XP practices</b>, ensuring faster
           iterations and reliable deployments.</li>
+        <!-- <li class="job-skill">JAVA, Springboot, Junit, MySQL, Javascript, AngularJS </li> -->
       </ul>
     </div>
 
-    <div class="job">
+    <div class="achievements">
       <h2>Key Achievements</h2>
       <ul>
         <li><b>Reduced booking latency by 30%</b> for a high-traffic airline platform supporting <b>30K+ concurrent
@@ -481,19 +739,17 @@
       </ul>
     </div>
   </div>
-  <div class="section" style="text-align: left;">
-    <h2>Skills</h2>
-    <div class="skills-grid" style="margin-left: 3.8rem;">
-      <div><b>Backend:</b> Java, Spring Boot, Quarkus, Kafka, Hibernate/JPA</div>
-      <div><b>Cloud & Infra:</b> AWS (Lambda, S3, Route53, SQS, SNS, EventBridge), Docker, Kubernetes, Redis</div>
-      <div style="margin-top: 10px;"><b>Frontend:</b> Angular, React, Next.js, TypeScript</div>
-      <div style="margin-top: 10px;"><b>DevOps/Tools:</b> GitLab CI/CD, AWS CloudWatch, Veracode, MySQL, MongoDB</div>
-    </div>
-  </div>
 
-  <div class=" section">
+  <div class="section">
     <h2>Education</h2>
-    <p style="margin-left: 3.8rem;">B.E. in Computer Science Engineering | 2015 – 2019 | India<br>CGPA: 8.2 / 10</p>
+    <p style="margin-left: 3.8rem;">
+      B.E. in Computer Science Engineering | 2015 – 2019 | India<br>
+      CGPA: 8.2 / 10<br>
+      Relevant Coursework: <b>OOPS (Object Oriented Programming)</b>, <b>Data Structures & Algorithms</b>, Operating
+      Systems,
+      Database Management Systems, Computer Networks, Software Engineering, Cloud Computing, <b>Distributed Systems</b>,
+      <b>Software Design</b>
+    </p>
   </div>
 
   <div class="section">
@@ -561,6 +817,18 @@
           repo.
         </div>
       </li>
+    </ul>
+  </div>
+
+
+  <div class="section">
+    <h2>Achievements & Honors:</h2>
+    <ul style="margin-left: 3.8rem;">
+      <li><b>Mentor at Newton School:</b> Guided aspiring developers in mastering data structures, algorithms, and
+        full-stack
+        development through structured mentorship and hands-on coding practice.</li>
+      <li><b>AI Foundations Nanodegree</b> – Udacity | Issued May 2018</li>
+      <li><b>Android Basics Nanodegree</b> – Udacity | Issued May 2017</li>
     </ul>
   </div>
 
