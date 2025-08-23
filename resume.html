@@ -497,6 +497,27 @@
         font-size: 14px;
       }
     }
+
+    /* global */
+    html,
+    body {
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* print overrides */
+    @media print {
+
+      h1,
+      .resume-title {
+        font-weight: 300 !important;
+      }
+
+      .resume-title span {
+        font-weight: 500 !important;
+      }
+    }
   </style>
   </div>
   <style>
