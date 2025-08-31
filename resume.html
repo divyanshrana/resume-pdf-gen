@@ -37,25 +37,31 @@
     }
 
     .contact {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 14px;
-      color: #444;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #444; /* default for plain text (phone, location) */
+}
 
-    .contact-link,
-    .contact-info {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: inherit;
-    }
+.contact-link {
+  color: #0366d6; /* blue for links */
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  color: #003366;
+  text-decoration: underline;
+}
+
+.contact-info {
+  color: #444; /* stays neutral */
+}
 
     .divider {
       color: #b0b8c1;
