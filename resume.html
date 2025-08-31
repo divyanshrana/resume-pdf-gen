@@ -36,22 +36,6 @@
       text-decoration: underline;
     }
 
-    .resume-title {
-      text-align: center;
-      font-size: 41px;
-      font-weight: 300;
-      font-family: "Poppins", Arial, sans-serif;
-      margin: 0;
-      color: #222;
-      letter-spacing: 1.5px;
-    }
-
-    .resume-title span {
-      font-weight: 500;
-      color: #111;
-      letter-spacing: 2px;
-    }
-
     .contact {
       display: flex;
       flex-wrap: wrap;
@@ -92,6 +76,22 @@
       grid-template-columns: 1fr 1fr;
     }
 
+    .resume-title {
+      text-align: center;
+      font-size: 41px;
+      font-weight: 300;
+      font-family: "Poppins", Arial, sans-serif;
+      margin: 0;
+      color: #222;
+      letter-spacing: 1.5px;
+    }
+
+    .resume-title span {
+      font-weight: 500;
+      color: #111;
+      letter-spacing: 2px;
+    }
+
     .job+.job {
       border-top: 1px solid #e0e7ef;
       padding-top: 10px;
@@ -113,9 +113,9 @@
       font-size: 18px;
     }
 
-    /* Global safety */
+    /* Global safeguard */
     body, p, li {
-      color: #222;
+      color: #222 !important;
     }
   </style>
 </head>
@@ -127,24 +127,33 @@
 
   <!-- Contact Bar -->
   <div class="contact">
+    <!-- Email -->
     <a href="mailto:divyansh.rana12@gmail.com" class="contact-link">divyansh.rana12@gmail.com</a>
     <span class="divider">|</span>
+
+    <!-- LinkedIn -->
     <a href="https://www.linkedin.com/in/divyansh-rana-a77696142/" class="contact-link" target="_blank">LinkedIn</a>
     <span class="divider">|</span>
+
+    <!-- Phone -->
     <span class="contact-info">+91 8968121890</span>
     <span class="divider">|</span>
+
+    <!-- Location -->
     <span class="contact-info">Bengaluru, India</span>
     <span class="divider">|</span>
+
+    <!-- Portfolio -->
     <a href="https://divyanshrana.github.io/docs/portfolio" class="contact-link" target="_blank">Portfolio</a>
   </div>
 
   <!-- Skills -->
   <div class="section">
-    <h2>Skills</h2>
+    <h2 style=" margin-top: 0;">Skills</h2>
     <div class="skills-grid" style="margin-left: 3.8rem;">
-      <div><b>Backend/Frameworks:</b> Java • Spring Boot • Quarkus • Java EE • Spring MVC • Hibernate • Application Servers • Servlet Containers • JPA</div>
+      <div><b>Backend/Frameworks:</b>  Java • Spring Boot • Quarkus • Java EEE • Spring MVC • Hibernate • Application Servers • Servlet Containers  • JPA</div>
       <div><b>Cloud/DevOps:</b> AWS (EC2, S3, Lambda, CloudWatch) • Kubernetes • Docker • GitLab CI/CD • Terraform • Helm • Grafana</div>
-      <div><b>Data Messaging:</b> Kafka</div>
+      <div><b>Data Messaging:</b> Kafka </div>
       <div><b>Frontend:</b> Angular • React</div>
       <div><b>Databases:</b> PostgreSQL • MySQL • MongoDB • DynamoDB • Neo4j • Redis</div>
     </div>
@@ -152,7 +161,7 @@
 
   <!-- Experience -->
   <div class="section">
-    <h2>Experience | 5+ years | Backend Engineering • Distributed Systems • Cloud</h2>
+    <h2>Experience | 5+ years | Backend Engineering • Distributed Systems • Cloud |</h2>
 
     <div class="job">
       <div>
@@ -161,16 +170,28 @@
         <span class="job-date">Dec 2022 – Present | Bangalore, India</span>
       </div>
       <ul>
-        <li><b>Architected and developed a cloud-native vacation booking platform</b> in <b>Java, Quarkus, Redis</b>, reducing booking latency by 30% and supporting <b>30K+ concurrent users</b>.</li>
-        <li><b>Led a cost-optimization initiative</b> in the <b>ROSA (Red Hat OpenShift Service on AWS)</b> environment by enabling autoscaling, saving <b>$30,000–$40,000 annually</b>.</li>
+        <li><b>Architected and developed a cloud-native vacation booking platform</b> in <b>Java, Quarkus, Redis</b>,
+          <b>reducing booking latency by 30%</b> and supporting <b>30K+ concurrent users</b>.
+        </li>
+        <li><b>Led a cost-optimization initiative</b> in the <b>ROSA (Red Hat OpenShift Service on AWS)</b> environment
+          by identifying
+          static pod deployments and enabling <b>autoscaling</b>, improving resource utilization for 20K–30K users and
+          achieving an estimated annual cost saving of <b>$30,000–$40,000</b>.</li>
         <li>Implemented SAGA-based distributed transactions with <b>Kafka</b> for fault-tolerant booking flows.</li>
-        <li><b>Developed a real-time user activity detection service</b>, enhancing engagement and security.</li>
-        <li>Owned roadmap for Spring-based vacation booking platform handling $4.8–9.6M weekly bookings with <b>99.9% availability on AWS EKS</b>.</li>
-        <li>Modernised 11 legacy mainframe apps to Nx micro-frontends and <b>Quarkus containers</b>, cutting deployment from weeks to hours.</li>
-        <li>Reduced <b>vacation-search latency by 93%</b> (30s → 2s).</li>
-        <li>Coached juniors on design reviews and CI/CD, boosting deployment success to <b>99%+</b>.</li>
-        <li>Instrumented services with <b>CloudWatch, Grafana</b>, reducing MTTR by 40%.</li>
-        <li class="job-skill">JAVA, AWS, EC2, S3, Route53, EventBridge, Cloudwatch, DynamoDB, IAMs, Redis, Quarkus, Springboot, Angular, NX, MongoDB, PostgreSQL, Docker</li>
+        <li><b>Developed a real-time user activity detection service</b> from scratch, monitoring cross-tab
+          interactions, syncing session states, and triggering configurable alerts (e.g., logout warnings), <b>enhancing
+            engagement and security</b>.</li>
+        <li>Owned the microservices roadmap for the <b>Spring</b> based vacation-booking platform handling $4.8–9.6 million USD in weekly
+            bookings while maintaining <b>99.9% availability on AWS EKS</b>.</li>
+        <li>Modernised 11 legacy mainframe applications to Nx micro-frontends and <b>Quarkus containers</b>, cutting deployment cycles from
+        1-2 weeks to under 4 hours <b>(80-90% faster)</b> across an 8-member team.
+        </li>
+        <li>Led caching and integration strategy that reduced <b>vacation-search latency by 93% (30 s ➜ 2 s) for 5,000-10,000 daily searches</b>.</li>
+        <li>Coached four junior engineers on design reviews and <b>CI/CD</b> hygiene, boosting <b>deployment success rate to 99%+</b>.</li>
+        <li>Instrumented services with <b>CloudWatch</b>, Grafana and automated alarms, <b>reducing mean-time-to-detect by 40%</b>.</li>
+        <li class="job-skill">JAVA, AWS, EC2, S3, Route53, EventBridge, Cloudwatch, DynamoDB, IAMs, Redis,
+          Quarkus, Springboot, Angular,
+          NX, MongoDB, PostgreSQL, Docker</li>
       </ul>
     </div>
 
@@ -181,12 +202,22 @@
         <span class="job-date">Oct 2020 – Dec 2022 | Bangalore, India</span>
       </div>
       <ul>
-        <li>Delivered an <b>automated credit-decisioning platform</b> used by 150+ banks, processing 3M decisions and ~$2.84B monthly.</li>
-        <li>Integrated bureau + alternative-data APIs, boosting accuracy by 15%.</li>
-        <li>Built pricing-guidance API, enabling ~5% sales uplift.</li>
-        <li>Developed a forecasting dashboard (Spring Boot, Kafka, Spark Streaming), reducing reporting from hours to minutes.</li>
-        <li>Introduced <b>TDD + PR templates</b>, raising coverage to 80% and cutting defects by 30%.</li>
-        <li class="job-skill">JAVA, Springboot, Kafka, Junit, AWS Lambda, NodeJS, PySpark, MongoDB, AngularJS</li>
+        <li>Delivered an <b>automated credit-decisioning platform </b> used by 150+ banks/NBFCs, processing 3 million decisions and ~$2.84
+          billion USD in loan applications per month, increasing 1-hour decision share from <b>35% to 62%</b>.
+        </li>
+        <li>Integrated bureau and <b>alternative-data APIs</b>, improving credit-risk prediction accuracy by 15% through smarter data aggregation
+          and <b>real-time ingestion pipelines</b>.
+        </li>
+        <li>Built a pricing-guidance API for a global hardware client, <b>enabling ~5% sales</b> uplift via dynamic competitor benchmarking and
+           personalized price recommendations.
+        </li>
+        <li>Developed a real-time forecasting dashboard using <b>Java (Spring Boot), MySQL, Kafka Streaming, Spark Streaming,</b> and Angular,
+          reducing report generation time from hours to minutes, showcasing backend-focused full-stack development.
+        </li>
+        <li>Introduced PR templates, <b>test-driven development (TDD)</b>, and <b>design-pattern guidelines</b> for a 12-member engineering squad,
+        raising code coverage to 80% and reducing post-release defects by 30%</li>
+        <li class="job-skill">JAVA, Springboot, Kafka, Junit, AWS Lamda, AWS pipeline, NodeJS, PySpark, MongoDB,
+          Javascript, AngularJS, AurliaJS </li>
       </ul>
     </div>
 
@@ -197,9 +228,9 @@
         <span class="job-date">Aug 2019 – Oct 2020 | Pune, India</span>
       </div>
       <ul>
-        <li>Developed an internal job portal (Angular/Spring) serving 2,000+ employees.</li>
-        <li>Revamped intranet homepage for 10,000 staff, increasing engagement by 25%.</li>
-        <li>Consistently met 100% sprint commitments with CI practices.</li>
+        <li>Developed an internal job portal (Angular/Spring) <b>serving 2,000+ employees</b> and shortening HR coordination cycles.</li>
+        <li>Revamped intranet homepage used by 10,000 staff, increasing daily <b>engagement by 25%</b>.</li>
+        <li>Consistently met <b>100% of sprint commitments under XP and continuous-integration practices</b>.</li>
       </ul>
     </div>
   </div>
@@ -210,7 +241,9 @@
     <p style="margin-left: 3.8rem;">
       B.E. in Computer Science Engineering | 2015 – 2019 | India<br>
       CGPA: 8.2 / 10<br>
-      Relevant Skills: <b>OOPS</b>, <b>DSA</b>, Microservices, Cloud-Native Dev, Event-Driven Design, <b>DevOps CI/CD</b>, Agile, TDD, Performance Optimisation
+      Relevant Core Skills: <b>OOPS</b> (Object Oriented Programming), <b>Data Structures & Algorithms</b>, Microservices Architecture,
+      Cloud-Native Development, Event-Driven Design, <b>DevOps CI/CD, Agile-Scrum Methodology</b>, Technical Leadership Mentoring, Test-Driven Development (TDD)
+      <b>Software Design</b>,Performance Optimisation
     </p>
   </div>
 
@@ -218,23 +251,54 @@
   <div class="section">
     <h2>Projects</h2>
     <ul style="margin-left: 2.5rem;">
-      <li>
-        <a href="https://github.com/divyanshrana/reddit-image-bot" target="_blank">GenAI Reddit Uploader</a> – Automated bot using <b>Stable Diffusion XL</b>, GitHub Actions for scheduling, end-to-end automated publishing.
+      <li style="margin-bottom: 18px;">
+        <div>
+          <b>
+            <a href="https://github.com/divyanshrana/reddit-image-bot" target="_blank" rel="noopener noreferrer">
+              GenAI Reddit Uploader
+            </a>
+          </b>
+        </div>
+        <div>
+         • Automated bot using <b>Stable Diffusion XL for image generation </b>with dynamic text, filters, and anti-patterns.
+         • Integrated GitHub Actions worker pipelines to schedule daily posts on a subreddit.
+         • Enables end-to-end automated content generation and publishing
+        </div>
       </li>
-      <li>
-        <a href="https://github.com/divyanshrana/photogram" target="_blank">Photogram (Social Media App)</a> – Social-media clone with Spring Boot, React, JWT, REST APIs, secure image storage.
+      <li style="margin-bottom: 18px;">
+        <div>
+          <b>
+            <a href="https://github.com/divyanshrana/photogram" target="_blank" rel="noopener noreferrer">
+              Photogram (Social Media App)
+            </a>
+          </b>
+        </div>
+        <div>
+        • Developed a social-media clone using Spring Boot, React and <b>JWT-based </b>authentication.
+        • Implemented RESTful APIs, user feeds and secure image storage to showcase full-stack capabilities.
+        </div>
       </li>
-      <li>
-        <a href="https://github.com/divyanshrana/graphlink" target="_blank">GraphLink (Scalable Backend Infra)</a> – Event-driven microservices playground on Kubernetes with Neo4j, PostgreSQL, Kafka.
+      <li style="margin-bottom: 18px;">
+        <div>
+          <b>
+            <a href="https://github.com/divyanshrana/graphlink" target="_blank" rel="noopener noreferrer">
+              GraphLink (Scalable Backend Infra)
+            </a>
+          </b>
+        </div>
+        <div>
+          • Built an <b>event-driven microservices</b> playground on Kubernetes integrating Neo4J, PostgreSQL and Kafka.
+          • Demonstrated best practices for <b>scalable</b> graph-based data processing and container orchestration.
+        </div>
       </li>
     </ul>
   </div>
 
   <!-- Achievements -->
   <div class="section">
-    <h2>Achievements & Honors</h2>
+    <h2>Achievements & Honors:</h2>
     <ul style="margin-left: 3.8rem;">
-      <li><b>Top MVP Learner</b>, Delta Air Lines (156 Udemy Business hours), Q1-Q2 2023.</li>
+      <li><b>Top MVP Learner, Delta Air Lines (156 Udemy Business hours)</b>, Q1-Q2 2023.</li>
       <li><b>Promotion: Software Developer I → II</b>, Delta Air Lines (Mar 2024)</li>
       <li><b>Promotion: Software Engineer I → II</b>, Scienaptic AI (Oct 2022)</li>
       <li><b>AI Foundations Nanodegree</b> – Udacity | Issued May 2018</li>
