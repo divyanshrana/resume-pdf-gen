@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,22 +134,6 @@
       min-width: 0;
     }
 
-    .ai-experience {
-      border-left: 3px solid #003366;
-      padding-left: 12px;
-      margin: 10px 0 12px;
-    }
-
-    .ai-experience h3 {
-      font-size: 16px;
-      color: #003366;
-      margin: 0 0 6px;
-    }
-
-    .ai-experience ul {
-      margin-left: 20px !important;
-    }
-
     @media (max-width: 700px) {
       body {
         margin: 20px 4%;
@@ -249,11 +232,45 @@
   </div>
 
 
+  <!-- Summary -->
+  <div class="section">
+
+    <h2 style="margin-top: 0;">Summary</h2>
+
+    <p style="margin: 8px 0 0;">
+      Software engineer with 7+ years building production backend and
+      distributed systems at JPMorgan Chase, Delta Air Lines and
+      Scienaptic AI, currently building an AI-native autonomous
+      engineering agent on LLMs and the Model Context Protocol (MCP)
+      that drives development, CI/CD, deployment and validation
+      end to end. Depth across event-driven microservices, cloud-native
+      infrastructure, data pipelines and test-driven delivery, with
+      hands-on experience designing the tool integrations and feedback
+      loops that let an agent act safely against real systems.
+    </p>
+
+  </div>
+
+
   <!-- Technical Skills -->
   <div class="section">
-    <h2 style="margin-top: 0;">Technical Skills</h2>
+
+    <h2>Technical Skills</h2>
 
     <div class="skills-grid" style="margin-left: 3.8rem;">
+
+      <div>
+        <b>AI / Agentic Systems:</b>
+        LLM Integration • Model Context Protocol (MCP) • Tool-Calling
+        &amp; Tool-Use Design • Agent Workflow Orchestration •
+        Multi-Step Agent Pipelines • Prompt Engineering •
+        Stable Diffusion XL
+      </div>
+
+      <div>
+        <b>Languages:</b>
+        Java • Python • TypeScript • JavaScript • SQL
+      </div>
 
       <div>
         <b>Backend / Frameworks:</b>
@@ -264,12 +281,13 @@
       <div>
         <b>Cloud / DevOps:</b>
         AWS (ECS, S3, Lambda, CloudWatch) • Kubernetes • Docker •
-        GitLab CI/CD • Terraform • Helm • Grafana
+        Git • GitLab CI/CD • GitHub Actions • Jenkins • Spinnaker •
+        Terraform • Helm • Grafana
       </div>
 
       <div>
         <b>Data Messaging / Testing:</b>
-        Kafka • Unit Testing • JUnit
+        Kafka • Unit Testing • JUnit • Mockito • Test-Driven Development
       </div>
 
       <div>
@@ -290,8 +308,8 @@
   <div class="section">
 
     <h2>
-      Experience | 7+ years | Backend Engineering • Distributed Systems •
-      Cloud • Agentic Workflow
+      Experience | 7+ years | AI Agents &amp; LLM Systems •
+      Backend Engineering • Distributed Systems • Cloud
     </h2>
 
 
@@ -314,7 +332,39 @@
         </div>
       </div>
 
+
       <ul>
+
+        <li>
+          Built an AI-native autonomous software engineering agent on
+          Large Language Models and the <b>Model Context Protocol
+          (MCP)</b>, collapsing development, CI/CD, deployment and
+          post-deploy validation into a single agent loop instead of
+          hand-offs across disconnected tools.
+        </li>
+
+        <li>
+          Designed the agent's tool layer over <b>Bitbucket, Jira and
+          Confluence</b> for ticket context, code changes and
+          documentation, and <b>Jenkins and Spinnaker</b> for build
+          and deployment orchestration, so one instruction carries a
+          change from specification through to a running service.
+        </li>
+
+        <li>
+          Closed the feedback loop by wiring <b>AWS, observability
+          dashboards and application logs</b> into the agent's
+          workflow, giving it the deployment signals needed to verify
+          a release and surface real failures rather than report
+          success blindly.
+        </li>
+
+        <li>
+          [Add one outcome bullet: what the agent measurably changed —
+          e.g. cycle time from X to Y, N workflows automated,
+          M engineers onboarded, or deployment failures caught
+          pre-production.]
+        </li>
 
         <li>
           Designed and implemented reconciliation mechanisms to support
@@ -347,46 +397,13 @@
           Led a high-risk framework migration with a controlled rollout.
         </li>
 
-      </ul>
-
-
-      <!-- Expanded AI Agent Experience -->
-      <div class="ai-experience">
-
-        <h3>AI-Native Autonomous Software Engineering Agent</h3>
-
-        <ul>
-
-          <li>
-            Built an AI-native autonomous software engineering agent using
-            Large Language Models (LLMs) and Model Context Protocol (MCP)
-            to orchestrate end-to-end software engineering workflows,
-            spanning development, CI/CD, deployment, and validation.
-          </li>
-
-          <li>
-            Integrated the agent with Bitbucket, Jira, and Confluence to
-            support software development workflows, alongside Jenkins and
-            Spinnaker for CI/CD and deployment orchestration.
-          </li>
-
-          <li>
-            Integrated AWS, observability dashboards, and application logs
-            into the agent's workflow to support deployment monitoring and
-            validation across the software delivery lifecycle.
-          </li>
-
-        </ul>
-
-      </div>
-
-      <ul>
         <li class="job-skill">
           <b>Technologies:</b>
-          Java • AWS • Jenkins • ECS • CloudWatch • IAM • Redis •
-          Spring Boot • PostgreSQL • Docker • Databricks • LLMs • MCP •
+          LLMs • MCP • Java • AWS • Jenkins • ECS • CloudWatch • IAM •
+          Redis • Spring Boot • PostgreSQL • Docker • Databricks •
           Bitbucket • Jira • Confluence • Spinnaker
         </li>
+
       </ul>
 
     </div>
@@ -643,11 +660,13 @@
         </div>
 
         <div>
-          Automated bot using Stable Diffusion XL for image generation
-          with dynamic text, filters, and anti-patterns. Integrated
-          GitHub Actions worker pipelines to schedule daily posts on
-          a subreddit, enabling end-to-end automated content generation
-          and publishing.
+          Built an autonomous content pipeline around
+          <b>Stable Diffusion XL</b>, generating images from templated
+          prompts with dynamic text overlays, filters and negative
+          prompts tuned to suppress recurring generation artifacts.
+          Scheduled the full generate-and-publish path as a
+          <b>GitHub Actions</b> worker pipeline, so daily subreddit posts
+          run unattended with no human in the loop.
         </div>
 
       </li>
