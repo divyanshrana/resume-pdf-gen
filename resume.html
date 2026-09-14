@@ -243,10 +243,16 @@
       Scienaptic AI, currently building an AI-native autonomous
       engineering agent on LLMs and the Model Context Protocol (MCP)
       that drives development, CI/CD, deployment and validation
-      end to end. Depth across event-driven microservices, cloud-native
-      infrastructure, data pipelines and test-driven delivery, with
-      hands-on experience designing the tool integrations and feedback
-      loops that let an agent act safely against real systems.
+      end to end. Alongside this, ships real-time conversational voice
+      AI — multi-agent orchestration, tool calling, agent memory and
+      WebRTC audio — together with the evaluation, regression and
+      load-testing pipelines that keep agents honest in production,
+      and authors adversarially hardened agent benchmark tasks with
+      Docker environments and pytest verifiers. Depth across
+      event-driven microservices, cloud-native infrastructure, data
+      pipelines and test-driven delivery, with hands-on experience
+      designing the tool integrations and feedback loops that let an
+      agent act safely against real systems.
     </p>
 
   </div>
@@ -262,9 +268,20 @@
       <div>
         <b>AI / Agentic Systems:</b>
         LLM Integration • Model Context Protocol (MCP) • Tool-Calling
-        &amp; Tool-Use Design • Agent Workflow Orchestration •
-        Multi-Step Agent Pipelines • Prompt Engineering •
+        &amp; Tool-Use Design • Multi-Agent Orchestration •
+        Agent Workflow Orchestration • Multi-Step Agent Pipelines •
+        Prompt Engineering &amp; System-Prompt Design •
+        Agent Memory (Structured + Episodic Graphs) •
+        LLM-as-Judge Evaluation • Regression Harnesses for Agents •
         Stable Diffusion XL
+      </div>
+
+      <div>
+        <b>Voice / Real-Time AI:</b>
+        Conversational Voice Agents • STT &amp; TTS Pipelines •
+        VAD &amp; Audio-Quality Analysis • Multilingual Voice Profiles
+        (150+ languages) • WebRTC • aiortc • Opus (48 kHz) •
+        WebSocket Signaling • TTFB &amp; Latency Benchmarking
       </div>
 
       <div>
@@ -275,29 +292,32 @@
       <div>
         <b>Backend / Frameworks:</b>
         Java • Spring Boot • Quarkus • Spring MVC • Hibernate •
-        Application Servers • Servlet Containers • JPA
+        FastAPI • Uvicorn • Next.js • Application Servers •
+        Servlet Containers • JPA
       </div>
 
       <div>
         <b>Cloud / DevOps:</b>
-        AWS (ECS, S3, Lambda, CloudWatch) • Kubernetes • Docker •
-        Git • GitLab CI/CD • GitHub Actions • Jenkins • Spinnaker •
-        Terraform • Helm • Grafana
+        AWS (ECS, S3, Lambda, CloudWatch) • GCP / GCS • Vercel •
+        Kubernetes • Docker • Git • GitLab CI/CD • GitHub Actions •
+        Jenkins • Spinnaker • Terraform • Helm • Grafana
       </div>
 
       <div>
         <b>Data Messaging / Testing:</b>
-        Kafka • Unit Testing • JUnit • Mockito • Test-Driven Development
+        Kafka • DuckDB • Parquet • Unit Testing • JUnit • Mockito •
+        pytest • Test-Driven Development • Load &amp; Soak Testing
       </div>
 
       <div>
         <b>Frontend:</b>
-        Angular • TypeScript • JavaScript
+        Angular • Next.js • TypeScript • JavaScript
       </div>
 
       <div>
         <b>Databases:</b>
-        PostgreSQL • MySQL • MongoDB • DynamoDB • Neo4j • Redis
+        PostgreSQL • MySQL • MongoDB • DynamoDB • Neo4j • FalkorDB •
+        Graphiti • DuckDB • Redis
       </div>
 
     </div>
@@ -309,8 +329,146 @@
 
     <h2>
       Experience | 7+ years | AI Agents &amp; LLM Systems •
-      Backend Engineering • Distributed Systems • Cloud
+      Voice AI &amp; Evaluation • Backend Engineering •
+      Distributed Systems • Cloud
     </h2>
+
+
+    <!-- Voice AI / agent platform work -->
+    <div class="job">
+
+      <div class="job-header">
+        <div>
+          <span style="font-weight: bold;">
+            Conversational Voice AI Platform
+          </span>
+          –
+          <span class="job-title">
+            <b>Agent Engineering, Memory &amp; Evaluation</b>
+          </span>
+        </div>
+      </div>
+
+      <ul>
+
+        <li>
+          Built and fine-tuned <b>conversational voice AI agents</b> for
+          real-time, child-facing interactions, with a
+          <b>multi-agent orchestration</b> system carrying tailored
+          system prompts, behavioral constraints and multilingual voice
+          profiles across <b>150+ languages</b>, plus tool calls for
+          session-end detection, schedule lookups, idle-watchdog
+          monitoring and search grounding.
+        </li>
+
+        <li>
+          Built an <b>evaluation pipeline</b> that runs STT over real
+          child audio from every production session and compares it
+          against the live transcript to surface ASR, missed-speech,
+          <b>VAD</b> and audio-quality issues, and runs an
+          <b>LLM judge</b> for agent-behavior and tool-calling failures.
+          Generates regression test cases from real turns against each
+          agent's live system prompt and flags prompt gaps with
+          suggested rewrites, over a <b>DuckDB/Parquet warehouse on
+          GCS</b> with a <b>FastAPI/Uvicorn</b> dashboard in vanilla JS.
+        </li>
+
+        <li>
+          Designed a <b>three-layer agent memory system</b> —
+          <b>FalkorDB</b> structured graph, <b>Graphiti</b> episodic
+          graph and rolling temporal summaries — letting agents persist
+          and recall per-child interests, preferences and history
+          through tool calls, with <b>async fact extraction</b> keeping
+          the audio path non-blocking.
+        </li>
+
+        <li>
+          Built a <b>WebRTC session simulation and load-testing
+          harness</b> that replays real session audio into a live
+          session with no device in the loop, negotiating the
+          split-transport contract (<b>WebSocket</b> signaling and mic
+          gate, <b>aiortc</b> peer connection streaming
+          <b>48 kHz Opus</b>) and scaling to <b>500 concurrent
+          sessions</b> to measure agent <b>TTFB percentiles</b>,
+          response latency and error rates under load.
+        </li>
+
+        <li>
+          Deployed an internal <b>voice generation tool</b>
+          (<b>Next.js / FastAPI on Vercel</b>) to generate
+          <b>TTS</b> for main-character dialogue across all stories.
+        </li>
+
+        <li class="job-skill">
+          <b>Technologies:</b>
+          Python • LLMs • STT / TTS • VAD • WebRTC • aiortc • Opus •
+          WebSockets • FastAPI • Uvicorn • Next.js • Vercel • DuckDB •
+          Parquet • GCS • FalkorDB • Graphiti • JavaScript
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <!-- Agent benchmark / eval authoring work -->
+    <div class="job">
+
+      <div class="job-header">
+        <div>
+          <span style="font-weight: bold;">
+            Agent Benchmark Engineering — Terminal-Bench 2
+          </span>
+          –
+          <span class="job-title">
+            <b>Task Design, Verifiers &amp; Adversarial Hardening</b>
+          </span>
+        </div>
+
+        <div class="job-date">
+          Remote
+        </div>
+      </div>
+
+      <ul>
+
+        <li>
+          Authored <b>35+ accepted tasks</b> for <b>Terminal-Bench 2</b>
+          across 14 domains including security, systems and
+          infrastructure, ETL, formal reasoning and ML infrastructure,
+          each shipping as a <b>Docker environment</b>, instruction
+          spec, reference oracle and <b>pytest verifier</b>, calibrated
+          so a frontier coding agent fails at least <b>3 of 5 runs</b>
+          while the oracle still solves it.
+        </li>
+
+        <li>
+          Built verifiers for <b>soundness and completeness</b>, so
+          wrong and partial solutions fail while alternative correct
+          approaches still pass. Generated grading data per submission
+          from a digest of the submitted program and graded from
+          pristine copies outside the agent's write path.
+        </li>
+
+        <li>
+          Hardened tasks against the failure modes an adversarial audit
+          targets: hidden rules the verifier grades but the instruction
+          never states, tolerances loose enough to accept a wrong
+          answer, unseeded fixtures, and paths letting submitted code
+          reach the answer key. Every task had to hold up across
+          repeated agent trials in ephemeral <b>Daytona</b> containers
+          under the <b>Harbor</b> harness.
+        </li>
+
+        <li class="job-skill">
+          <b>Technologies:</b>
+          Python • pytest • Docker • Daytona • Harbor • LLM Coding
+          Agents • Evaluation Design
+        </li>
+
+      </ul>
+
+    </div>
 
 
     <!-- JPMorgan Chase -->
