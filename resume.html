@@ -279,8 +279,8 @@
       <div>
         <b>Voice / Real-Time AI:</b>
         Conversational Voice Agents • STT &amp; TTS Pipelines •
-        VAD &amp; Audio-Quality Analysis • Multilingual Voice Profiles
-        (150+ languages) • WebRTC • aiortc • Opus (48 kHz) •
+        VAD &amp; Audio-Quality Analysis • Multilingual Voice Profiles •
+        WebRTC • aiortc • Opus (48 kHz) •
         WebSocket Signaling • TTFB &amp; Latency Benchmarking
       </div>
 
@@ -332,83 +332,6 @@
       Voice AI &amp; Evaluation • Backend Engineering •
       Distributed Systems • Cloud
     </h2>
-
-
-    <!-- Voice AI / agent platform work -->
-    <div class="job">
-
-      <div class="job-header">
-        <div>
-          <span style="font-weight: bold;">
-            Conversational Voice AI Platform
-          </span>
-          –
-          <span class="job-title">
-            <b>Agent Engineering, Memory &amp; Evaluation</b>
-          </span>
-        </div>
-      </div>
-
-      <ul>
-
-        <li>
-          Built and fine-tuned <b>conversational voice AI agents</b> for
-          real-time, child-facing interactions, with a
-          <b>multi-agent orchestration</b> system carrying tailored
-          system prompts, behavioral constraints and multilingual voice
-          profiles across <b>150+ languages</b>, plus tool calls for
-          session-end detection, schedule lookups, idle-watchdog
-          monitoring and search grounding.
-        </li>
-
-        <li>
-          Built an <b>evaluation pipeline</b> that runs STT over real
-          child audio from every production session and compares it
-          against the live transcript to surface ASR, missed-speech,
-          <b>VAD</b> and audio-quality issues, and runs an
-          <b>LLM judge</b> for agent-behavior and tool-calling failures.
-          Generates regression test cases from real turns against each
-          agent's live system prompt and flags prompt gaps with
-          suggested rewrites, over a <b>DuckDB/Parquet warehouse on
-          GCS</b> with a <b>FastAPI/Uvicorn</b> dashboard in vanilla JS.
-        </li>
-
-        <li>
-          Designed a <b>three-layer agent memory system</b> —
-          <b>FalkorDB</b> structured graph, <b>Graphiti</b> episodic
-          graph and rolling temporal summaries — letting agents persist
-          and recall per-child interests, preferences and history
-          through tool calls, with <b>async fact extraction</b> keeping
-          the audio path non-blocking.
-        </li>
-
-        <li>
-          Built a <b>WebRTC session simulation and load-testing
-          harness</b> that replays real session audio into a live
-          session with no device in the loop, negotiating the
-          split-transport contract (<b>WebSocket</b> signaling and mic
-          gate, <b>aiortc</b> peer connection streaming
-          <b>48 kHz Opus</b>) and scaling to <b>500 concurrent
-          sessions</b> to measure agent <b>TTFB percentiles</b>,
-          response latency and error rates under load.
-        </li>
-
-        <li>
-          Deployed an internal <b>voice generation tool</b>
-          (<b>Next.js / FastAPI on Vercel</b>) to generate
-          <b>TTS</b> for main-character dialogue across all stories.
-        </li>
-
-        <li class="job-skill">
-          <b>Technologies:</b>
-          Python • LLMs • STT / TTS • VAD • WebRTC • aiortc • Opus •
-          WebSockets • FastAPI • Uvicorn • Next.js • Vercel • DuckDB •
-          Parquet • GCS • FalkorDB • Graphiti • JavaScript
-        </li>
-
-      </ul>
-
-    </div>
 
 
     <!-- Agent benchmark / eval authoring work -->
@@ -525,6 +448,53 @@
         </li>
 
         <li>
+          Built and fine-tuned <b>conversational voice AI agents</b> for
+          real-time interactions, with a <b>multi-agent orchestration</b>
+          layer carrying tailored system prompts, behavioral constraints
+          and multilingual voice profiles, plus tool calls for
+          session-end detection, schedule lookups, idle-watchdog
+          monitoring and search grounding.
+        </li>
+
+        <li>
+          Built an <b>evaluation pipeline</b> that runs STT over real
+          audio from production sessions and compares it against the
+          live transcript to surface ASR, missed-speech, <b>VAD</b> and
+          audio-quality issues, and runs an <b>LLM judge</b> for
+          agent-behavior and tool-calling failures. Generates regression
+          test cases from real turns against each agent's live system
+          prompt and flags prompt gaps with suggested rewrites, over a
+          <b>DuckDB/Parquet</b> warehouse on <b>GCS</b> with a
+          <b>FastAPI/Uvicorn</b> dashboard in vanilla JS.
+        </li>
+
+        <li>
+          Designed a three-layer <b>agent memory system</b> —
+          <b>FalkorDB</b> structured graph, <b>Graphiti</b> episodic
+          graph and rolling temporal summaries — letting agents persist
+          and recall per-user interests, preferences and history through
+          tool calls, with <b>async fact extraction</b> keeping the
+          audio path non-blocking.
+        </li>
+
+        <li>
+          Built a <b>WebRTC session simulation and load-testing
+          harness</b> that replays real session audio into a live
+          session with no device in the loop, negotiating the
+          split-transport contract (<b>WebSocket</b> signaling and mic
+          gate, <b>aiortc</b> peer connection streaming
+          <b>48 kHz Opus</b>) and scaling to hundreds of concurrent
+          sessions to measure agent TTFB percentiles, response latency
+          and error rates under load.
+        </li>
+
+        <li>
+          Deployed an internal <b>voice generation tool</b>
+          (<b>Next.js / FastAPI on Vercel</b>) to generate <b>TTS</b>
+          for main-character dialogue across story content.
+        </li>
+
+        <li>
           Designed and implemented reconciliation mechanisms to support
           backward compatibility during service evolution and schema
           changes, ensuring zero data loss and seamless production upgrades.
@@ -557,9 +527,11 @@
 
         <li class="job-skill">
           <b>Technologies:</b>
-          LLMs • MCP • Java • AWS • Jenkins • ECS • CloudWatch • IAM •
-          Redis • Spring Boot • PostgreSQL • Docker • Databricks •
-          Bitbucket • Jira • Confluence • Spinnaker
+          LLMs • MCP • Java • Python • AWS • Jenkins • ECS • CloudWatch •
+          IAM • Redis • Spring Boot • PostgreSQL • Docker • Databricks •
+          Bitbucket • Jira • Confluence • Spinnaker • STT / TTS • VAD •
+          WebRTC • aiortc • Opus • WebSockets • FastAPI • Uvicorn •
+          Next.js • Vercel • DuckDB • Parquet • GCS • FalkorDB • Graphiti
         </li>
 
       </ul>
